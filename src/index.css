@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SPARTA INC — THEME TOKEN SYSTEM
+   Three modes, one document. Every mode is a full re-skin driven by CSS
+   custom properties on :root. Components never hardcode color/type values —
+   they consume var(--token) so switching [data-theme] repaints instantly.
+   ========================================================================== */
+
+:root {
+  /* ---- Mode 1: Sleek Corporate (default) ---- */
+  --font-display: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  --bg: #0B0F19;
+  --bg-elevated: #10141F;
+  --bg-elevated-2: #161B29;
+  --surface-border: rgba(148, 163, 184, 0.14);
+  --text-primary: #EEF0F5;
+  --text-secondary: #94A3B8;
+  --text-muted: #5B6478;
+  --accent: #4F46E5;
+  --accent-soft: rgba(79, 70, 229, 0.14);
+  --accent-text: #EEF0F5;
+  --card-radius: 18px;
+  --control-radius: 12px;
+  --shadow-offset: 0 20px 60px -20px rgba(79, 70, 229, 0.35);
+  --border-width: 1px;
+  --tracking-display: -0.02em;
+  --weight-display: 700;
+  --uppercase-eyebrow: 0.14em;
+}
+
+[data-theme='brutalist'] {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+
+  --bg: #000000;
+  --bg-elevated: #0A0A0A;
+  --bg-elevated-2: #121212;
+  --surface-border: #CCFF00;
+  --text-primary: #FFFFFF;
+  --text-secondary: #B8B8B8;
+  --text-muted: #6E6E6E;
+  --accent: #CCFF00;
+  --accent-soft: rgba(204, 255, 0, 0.12);
+  --accent-text: #000000;
+  --card-radius: 0px;
+  --control-radius: 0px;
+  --shadow-offset: 8px 8px 0 0 #CCFF00;
+  --border-width: 2px;
+  --tracking-display: -0.01em;
+  --weight-display: 800;
+  --uppercase-eyebrow: 0.02em;
+}
+
+[data-theme='editorial'] {
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Jost', sans-serif;
+  --font-mono: 'Jost', sans-serif;
+
+  --bg: #FBFBF9;
+  --bg-elevated: #FFFFFF;
+  --bg-elevated-2: #F3F1EA;
+  --surface-border: rgba(26, 26, 26, 0.12);
+  --text-primary: #1A1A1A;
+  --text-secondary: #55524A;
+  --text-muted: #8A8578;
+  --accent: #A6832C;
+  --accent-soft: rgba(166, 131, 44, 0.1);
+  --accent-text: #FBFBF9;
+  --card-radius: 2px;
+  --control-radius: 2px;
+  --shadow-offset: 0 24px 50px -24px rgba(26, 26, 26, 0.22);
+  --border-width: 1px;
+  --tracking-display: 0em;
+  --weight-display: 600;
+  --uppercase-eyebrow: 0.24em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Hide native cursor only where our custom cursor is active (desktop, fine pointer) */
+@media (hover: hover) and (pointer: fine) {
+  body[data-cursor='custom'], body[data-cursor='custom'] a, body[data-cursor='custom'] button {
+    cursor: none;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+/* Visible keyboard focus, theme aware */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--tracking-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.eyebrow {
+  letter-spacing: var(--uppercase-eyebrow);
+  text-transform: uppercase;
+}
+
+.theme-border {
+  border-color: var(--surface-border);
+}
+
+.theme-transition {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Scrollbar theming (webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 999px;
+}
+
+/* Utility: theme-aware card shadow used by brutalist offset & corporate glow & editorial soft shadow */
+.themed-shadow {
+  box-shadow: var(--shadow-offset);
+}
+
+/* Themed range input (budget calculator) */
+.themed-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-border);
+  outline: none;
+}
+.themed-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-elevated);
+  box-shadow: 0 0 0 1px var(--surface-border);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+.themed-range::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+.themed-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg-elevated);
+  box-shadow: 0 0 0 1px var(--surface-border);
+  cursor: pointer;
+}
+.themed-range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-border);
+}
