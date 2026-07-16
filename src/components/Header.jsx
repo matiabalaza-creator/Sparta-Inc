@@ -29,13 +29,21 @@ export default function Header() {
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-10">
+        {/* Brand Logo & Name Area */}
         <a
           href="#top"
           data-cursor-hover
-          className="font-display text-lg tracking-tight"
+          className="flex items-center gap-2 font-display text-lg tracking-tight"
           style={{ color: 'var(--text-primary)' }}
         >
-          Sparta <span style={{ color: 'var(--accent)' }}>Inc</span>
+          <img 
+            src="/logo.png" 
+            alt="Sparta Inc Logo" 
+            className="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105"
+          />
+          <span className="font-semibold">
+            Sparta <span style={{ color: 'var(--accent)' }}>Inc</span>
+          </span>
         </a>
 
         <nav className="hidden items-center gap-9 md:flex" aria-label="Primary">
