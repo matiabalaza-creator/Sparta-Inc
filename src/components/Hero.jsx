@@ -1,17 +1,35 @@
 import { motion } from 'framer-motion'
-import { ArrowDownRight, MessageCircle } from 'lucide-react'
+import { ArrowDownRight, MessageCircle, Smartphone, Zap, ShieldCheck } from 'lucide-react'
 import ThemedBackdrop from './ThemedBackdrop.jsx'
-import CheckoutMockup from './CheckoutMockup.jsx'
 
 const WHATSAPP_NUMBER = '256762110535'
 
 export default function Hero() {
+  const conversionCards = [
+    {
+      icon: <Smartphone className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
+      title: "Built for Local Commerce",
+      desc: "Seamless integration with MTN MoMo, Airtel Money, and automated WhatsApp order routing designed to convert Ugandan traffic into revenue."
+    },
+    {
+      icon: <Zap className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
+      title: "Performance-Obsessed Speed",
+      desc: "Zero clunky templates. Our custom-engineered sites load instantly across Uganda—even on slower mobile networks—to prevent customer drop-off."
+    },
+    {
+      icon: <ShieldCheck className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
+      title: "Transparent Partnership",
+      desc: "No disappearing acts or hidden monthly fees. You get 100% ownership of your ultra-clean source code and reliable local support."
+    }
+  ]
+
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
       <ThemedBackdrop variant="grid" />
       <ThemedBackdrop variant="particles" className="opacity-40" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.15fr_0.85fr] md:items-center md:px-10">
+      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
+        {/* Left Side: Editorial Content */}
         <div>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -83,14 +101,41 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.94 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="flex justify-center md:justify-end"
-        >
-          <CheckoutMockup />
-        </motion.div>
+        {/* Right Side: High-Converting Local Value Cards */}
+        <div className="flex flex-col gap-4">
+          {conversionCards.map((card, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.25 + idx * 0.1 }}
+              className="theme-transition flex gap-4 p-5 border"
+              style={{
+                borderRadius: 'var(--control-radius)',
+                borderWidth: 'var(--border-width)',
+                borderColor: 'var(--surface-border)',
+                backgroundColor: 'color-mix(in srgb, var(--bg) 95%, white 5%)',
+                boxShadow: 'var(--brutalist-shadow, none)'
+              }}
+            >
+              <div className="flex-shrink-0 mt-0.5">{card.icon}</div>
+              <div>
+                <h3 
+                  className="font-display text-base font-semibold mb-1" 
+                  style={{ color: 'var(--text-primary)' }}
+                >
+                  {card.title}
+                </h3>
+                <p 
+                  className="font-body text-xs leading-relaxed" 
+                  style={{ color: 'var(--text-secondary)' }}
+                >
+                  {card.desc}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )
