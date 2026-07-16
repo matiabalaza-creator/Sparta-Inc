@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { TrendingUp } from 'lucide-react'
 import BeforeAfterSlider from './BeforeAfterSlider.jsx'
-import { DatedTemplatePanel, CustomBuildPanel } from './WireframePanels.jsx'
 
 const PROJECTS = [
   {
@@ -9,16 +8,16 @@ const PROJECTS = [
     category: 'Retail · Kampala Road',
     metric: '+150% WhatsApp orders',
     detail: 'Replaced a Facebook-only storefront with a fast catalog site and one-tap WhatsApp checkout.',
-    kind: 'retail',
-    headline: 'Shop the new arrivals',
+    beforeImg: '/fashion-before.jpg',
+    afterImg: '/fashion-after.jpg',
   },
   {
     name: 'Uganda Logistics Co.',
     category: 'Logistics · Nakawa',
     metric: 'MoMo drop-offs down 40%',
     detail: 'Rebuilt a clunky quote form into a guided flow with inline Mobile Money confirmation.',
-    kind: 'logistics',
-    headline: 'Get an instant quote',
+    beforeImg: '/logistics-before.jpg',
+    afterImg: '/logistics-after.jpg',
   },
 ]
 
@@ -57,10 +56,34 @@ export default function WorkSection() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
           >
+            {/* Before After Slider containing actual images */}
             <BeforeAfterSlider
-              before={<DatedTemplatePanel kind={p.kind} />}
-              after={<CustomBuildPanel headline={p.headline} />}
+              before={
+                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-900">
+                  <img 
+                    src={p.beforeImg} 
+                    alt={`${p.name} Old Site`} 
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute bottom-3 left-3 bg-black/75 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
+                    Before (Slow Template)
+                  </span>
+                </div>
+              }
+              after={
+                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-950">
+                  <img 
+                    src={p.afterImg} 
+                    alt={`${p.name} Custom Rebuild`} 
+                    className="h-full w-full object-cover"
+                  />
+                  <span className="absolute bottom-3 right-3 bg-emerald-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
+                    After (Sparta Custom)
+                  </span>
+                </div>
+              }
             />
+
             <div className="mt-5 flex items-start justify-between gap-4">
               <div>
                 <h3 className="font-display text-lg" style={{ color: 'var(--text-primary)' }}>
