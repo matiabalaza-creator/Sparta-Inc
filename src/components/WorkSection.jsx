@@ -8,16 +8,16 @@ const PROJECTS = [
     category: 'Retail · Kampala Road',
     metric: '+150% WhatsApp orders',
     detail: 'Replaced a Facebook-only storefront with a fast catalog site and one-tap WhatsApp checkout.',
-    beforeImg: '/fashion-before.png', // Matched to your actual .png file
-    afterImg: '/fashion-after.png',   // Matched to your actual .png file
+    beforeImg: '/fashion-before.jpg', // CORRECTED: Now matches your GitHub .jpg file
+    afterImg: '/fashion-after.jpg',   // CORRECTED: Now matches your GitHub .jpg file
   },
   {
     name: 'Uganda Logistics Co.',
     category: 'Logistics · Nakawa',
     metric: 'MoMo drop-offs down 40%',
     detail: 'Rebuilt a clunky quote form into a guided flow with inline Mobile Money confirmation.',
-    beforeImg: '/logitics-before.png', // Matched to your actual file (keeping the typo 'logitics' and .png)
-    afterImg: '/logistics-after.jpg',   // This one is working perfectly already!
+    beforeImg: '/logistics-before.jpg', // CORRECTED: Now spelled correctly and matches .jpg
+    afterImg: '/logistics-after.jpg',  // This one was already working perfectly!
   },
 ]
 
@@ -59,17 +59,11 @@ export default function WorkSection() {
             {/* Before After Slider containing actual images */}
             <BeforeAfterSlider
               before={
-                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-900">
+                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-900 rounded-md">
                   <img 
                     src={p.beforeImg} 
                     alt={`${p.name} Old Site`} 
                     className="h-full w-full object-cover"
-                    onError={(e) => {
-                      // Fallback case-sensitivity check helper
-                      if (!e.target.src.includes('Fashion')) {
-                        e.target.src = p.beforeImg.replace('fashion', 'Fashion').replace('logitics', 'Logitics');
-                      }
-                    }}
                   />
                   <span className="absolute bottom-3 left-3 bg-black/75 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
                     Before (Slow Template)
@@ -77,16 +71,11 @@ export default function WorkSection() {
                 </div>
               }
               after={
-                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-950">
+                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-950 rounded-md">
                   <img 
                     src={p.afterImg} 
                     alt={`${p.name} Custom Rebuild`} 
                     className="h-full w-full object-cover"
-                    onError={(e) => {
-                      if (!e.target.src.includes('Fashion')) {
-                        e.target.src = p.afterImg.replace('fashion', 'Fashion');
-                      }
-                    }}
                   />
                   <span className="absolute bottom-3 right-3 bg-emerald-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
                     After (Sparta Custom)
