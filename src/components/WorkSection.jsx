@@ -8,16 +8,16 @@ const PROJECTS = [
     category: 'Retail · Kampala Road',
     metric: '+150% WhatsApp orders',
     detail: 'Replaced a Facebook-only storefront with a fast catalog site and one-tap WhatsApp checkout.',
-    beforeImg: '/fashion-before.jpg', // CORRECTED: Now matches your GitHub .jpg file
-    afterImg: '/fashion-after.jpg',   // CORRECTED: Now matches your GitHub .jpg file
+    beforeImg: '/fashion-before.jpg', 
+    afterImg: '/fashion-after.jpg', // If this stays blank, check if the file on GitHub ends in .png or .jpeg instead!
   },
   {
     name: 'Uganda Logistics Co.',
     category: 'Logistics · Nakawa',
     metric: 'MoMo drop-offs down 40%',
     detail: 'Rebuilt a clunky quote form into a guided flow with inline Mobile Money confirmation.',
-    beforeImg: '/logistics-before.jpg', // CORRECTED: Now spelled correctly and matches .jpg
-    afterImg: '/logistics-after.jpg',  // This one was already working perfectly!
+    beforeImg: '/logistics-before.jpg', 
+    afterImg: '/logistics-after.jpg',  
   },
 ]
 
@@ -56,7 +56,7 @@ export default function WorkSection() {
             viewport={{ once: true, margin: '-80px' }}
             transition={{ duration: 0.6, delay: i * 0.1 }}
           >
-            {/* Before After Slider containing actual images */}
+            {/* Before After Slider - Bottom labels removed */}
             <BeforeAfterSlider
               before={
                 <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-900 rounded-md">
@@ -65,21 +65,15 @@ export default function WorkSection() {
                     alt={`${p.name} Old Site`} 
                     className="h-full w-full object-cover"
                   />
-                  <span className="absolute bottom-3 left-3 bg-black/75 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
-                    Before (Slow Template)
-                  </span>
                 </div>
               }
               after={
-                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-950 rounded-md">
+                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-955 extrinsic-box bg-zinc-950 rounded-md">
                   <img 
                     src={p.afterImg} 
                     alt={`${p.name} Custom Rebuild`} 
                     className="h-full w-full object-cover"
                   />
-                  <span className="absolute bottom-3 right-3 bg-emerald-600 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white rounded">
-                    After (Sparta Custom)
-                  </span>
                 </div>
               }
             />
