@@ -4,12 +4,12 @@ import { MessageCircle, Phone, Mail } from 'lucide-react'
 
 const WHATSAPP_NUMBER = '256762110535'
 
-// Pricing model — indicative, in UGX. Rounded to sane tiers, not a quote.
+// Pricing model — indicative, in UGX.
 const FOUNDATION = 450000
 const PER_PAGE = 220000
 const ECOMMERCE_ADDON = 1350000
 const WHATSAPP_ADDON = 850000
-const UGX_PER_USD = 3800 // indicative FX rate, shown as an estimate only
+const UGX_PER_USD = 3800 // indicative FX rate estimate
 
 function formatUGX(n) {
   return `UGX ${n.toLocaleString('en-UG')}`
@@ -83,7 +83,7 @@ export default function Contact() {
 
             <div className="mt-9 space-y-4">
               <a
-                href="tel:+256762110535"
+                href={`tel:+${WHATSAPP_NUMBER}`}
                 data-cursor-hover
                 className="theme-transition flex items-center gap-3 border px-5 py-4"
                 style={{
@@ -125,7 +125,7 @@ export default function Contact() {
               borderWidth: 'var(--border-width)',
               borderColor: 'var(--surface-border)',
               backgroundColor: 'var(--bg-elevated)',
-              boxShadow: 'var(--shadow-offset)',
+              boxShadow: 'var(--brutalist-shadow, var(--shadow-offset))',
             }}
           >
             <p className="font-display text-lg" style={{ color: 'var(--text-primary)' }}>
@@ -138,7 +138,7 @@ export default function Contact() {
                 <label htmlFor="pages" className="font-body text-sm" style={{ color: 'var(--text-secondary)' }}>
                   Number of pages
                 </label>
-                <span className="font-display text-sm" style={{ color: 'var(--text-primary)' }}>
+                <span className="font-display text-sm font-semibold" style={{ color: 'var(--accent)' }}>
                   {pages}
                 </span>
               </div>
@@ -149,7 +149,8 @@ export default function Contact() {
                 max={12}
                 value={pages}
                 onChange={(e) => setPages(Number(e.target.value))}
-                className="themed-range mt-3 w-full"
+                className="themed-range mt-3 w-full accent-current"
+                style={{ color: 'var(--accent)' }}
                 data-cursor-hover
               />
             </div>
@@ -182,19 +183,19 @@ export default function Contact() {
                 <span className="eyebrow font-body text-[11px]" style={{ color: 'var(--text-muted)' }}>
                   Estimated tier
                 </span>
-                <span className="font-display text-sm" style={{ color: 'var(--accent)' }}>
+                <span className="font-display text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded" style={{ backgroundColor: 'color-mix(in srgb, var(--accent) 15%, transparent)', color: 'var(--accent)' }}>
                   {tierLabel}
                 </span>
               </div>
-              <div className="mt-2 flex items-baseline gap-2">
-                <span className="font-display text-2xl" style={{ color: 'var(--text-primary)' }}>
+              <div className="mt-3 flex items-baseline gap-2 flex-wrap">
+                <span className="font-display text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>
                   {formatUGX(total)}
                 </span>
-                <span className="font-body text-sm" style={{ color: 'var(--text-muted)' }}>
+                <span className="font-body text-sm" style={{ color: 'var(--text-secondary)' }}>
                   ≈ {formatUSD(total)}
                 </span>
               </div>
-              <p className="font-body mt-1 text-xs" style={{ color: 'var(--text-muted)' }}>
+              <p className="font-body mt-2 text-xs leading-normal" style={{ color: 'var(--text-muted)' }}>
                 Indicative estimate. Final pricing depends on scope review.
               </p>
             </div>
@@ -204,13 +205,14 @@ export default function Contact() {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-hover
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
               className="theme-transition mt-6 flex items-center justify-center gap-2 py-4 font-body text-sm font-medium"
               style={{
                 borderRadius: 'var(--control-radius)',
                 backgroundColor: 'var(--accent)',
                 color: 'var(--accent-text)',
+                boxShadow: 'var(--brutalist-shadow-sm, none)'
               }}
             >
               <MessageCircle size={17} />
@@ -236,6 +238,7 @@ function ToggleRow({ label, checked, onChange }) {
         borderRadius: 'var(--control-radius)',
         borderWidth: 'var(--border-width)',
         borderColor: 'var(--surface-border)',
+        backgroundColor: 'var(--bg)',
       }}
     >
       <span className="font-body text-sm" style={{ color: 'var(--text-primary)' }}>
@@ -249,7 +252,14 @@ function ToggleRow({ label, checked, onChange }) {
         <span
           className="theme-transition absolute top-0.5 h-5 w-5 rounded-full bg-white shadow"
           style={{ left: checked ? '22px' : '2px' }}
-        />
+        >
+          {checked && (
+            <span 
+              className="absolute inset-1 rounded-full" 
+              style={{ backgroundColor: 'var(--accent)' }} 
+            />
+          )}
+        </span>
       </span>
     </button>
   )
