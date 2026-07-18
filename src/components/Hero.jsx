@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowDownRight, MessageCircle, Smartphone, Zap, ShieldCheck } from 'lucide-react'
+import { ArrowDownRight, MessageCircle, Smartphone, Zap, ShieldCheck, Layers } from 'lucide-react'
 import ThemedBackdrop from './ThemedBackdrop.jsx'
 
 const WHATSAPP_NUMBER = '256762110535'
@@ -7,19 +7,19 @@ const WHATSAPP_NUMBER = '256762110535'
 export default function Hero() {
   const conversionCards = [
     {
+      icon: <Layers className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
+      title: "Functional Web & Mobile Apps",
+      desc: "We don't just design landing pages. We build powerful, custom-engineered digital software, internal dashboards, and utility portals tailored to your operations."
+    },
+    {
       icon: <Smartphone className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
-      title: "Built for Local Commerce",
-      desc: "Seamless integration with MTN MoMo, Airtel Money, and automated WhatsApp order routing designed to convert Ugandan traffic into revenue."
+      title: "Local Commerce Integrations",
+      desc: "Seamless integration with MTN MoMo, Airtel Money API, and automated WhatsApp order routing designed to convert Ugandan traffic into passive revenue."
     },
     {
       icon: <Zap className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
       title: "Performance-Obsessed Speed",
-      desc: "Zero clunky templates. Our custom-engineered sites load instantly across Uganda—even on slower mobile networks—to prevent customer drop-off."
-    },
-    {
-      icon: <ShieldCheck className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
-      title: "Transparent Partnership",
-      desc: "No disappearing acts or hidden monthly fees. You get 100% ownership of your ultra-clean source code and reliable local support."
+      desc: "Zero bloated software or heavy templates. Our codebases load instantly across Kampala and upcountry—even on slow mobile connections—to prevent customer drop-off."
     }
   ]
 
@@ -29,7 +29,7 @@ export default function Hero() {
       <ThemedBackdrop variant="particles" className="opacity-40" />
 
       <div className="relative mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
-        {/* Left Side: Editorial Content */}
+        {/* Left Side: Editorial & SEO-Optimized Content */}
         <div>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -39,7 +39,7 @@ export default function Hero() {
             style={{ color: 'var(--accent)' }}
           >
             <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-            Web design &amp; development · Kampala, Uganda
+            Bespoke Web Design &amp; Custom App Development · Uganda
           </motion.p>
 
           <motion.h1
@@ -49,7 +49,7 @@ export default function Hero() {
             className="font-display text-4xl leading-[1.08] sm:text-5xl md:text-6xl"
             style={{ color: 'var(--text-primary)' }}
           >
-            We build digital experiences that turn Ugandan visitors into paying customers.
+            Uganda's Premier Website Builders &amp; Custom App Developers.
           </motion.h1>
 
           <motion.p
@@ -59,8 +59,7 @@ export default function Hero() {
             className="font-body mt-6 max-w-xl text-base leading-relaxed sm:text-lg"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Bespoke engineering. Mobile Money &amp; WhatsApp integrations built to scale your business.
-            No slow templates. No excuses.
+            We transform business operations across East Africa with high-performance custom websites and functional software applications. Driven by automated workflow infrastructure.
           </motion.p>
 
           <motion.div
@@ -82,7 +81,7 @@ export default function Hero() {
               }}
             >
               <MessageCircle size={16} />
-              Start a project on WhatsApp
+              Build an App / Website
             </a>
             <a
               href="#work"
