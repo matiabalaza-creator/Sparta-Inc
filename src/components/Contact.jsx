@@ -82,8 +82,9 @@ export default function Contact() {
             </p>
 
             <div className="mt-9 space-y-4">
+              {/* Primary Contact Number */}
               <a
-                href={`tel:+${WHATSAPP_NUMBER}`}
+                href="tel:+256762110535"
                 data-cursor-hover
                 className="theme-transition flex items-center gap-3 border px-5 py-4"
                 style={{
@@ -96,8 +97,26 @@ export default function Contact() {
                 <Phone size={18} style={{ color: 'var(--accent)' }} />
                 <span className="font-body text-sm">+256 762 110 535</span>
               </a>
+
+              {/* Secondary Contact Number */}
               <a
-                href="mailto:hello@sparta-inc.dev"
+                href="tel:+256756814866"
+                data-cursor-hover
+                className="theme-transition flex items-center gap-3 border px-5 py-4"
+                style={{
+                  borderRadius: 'var(--card-radius)',
+                  borderWidth: 'var(--border-width)',
+                  borderColor: 'var(--surface-border)',
+                  color: 'var(--text-primary)',
+                }}
+              >
+                <Phone size={18} style={{ color: 'var(--accent)' }} />
+                <span className="font-body text-sm">+256 756 814 866</span>
+              </a>
+
+              {/* Updated Professional Email */}
+              <a
+                href="mailto:info@spartaincdev.com"
                 data-cursor-hover
                 className="theme-transition flex items-center gap-3 border px-5 py-4"
                 style={{
@@ -108,7 +127,7 @@ export default function Contact() {
                 }}
               >
                 <Mail size={18} style={{ color: 'var(--accent)' }} />
-                <span className="font-body text-sm">hello@sparta-inc.dev</span>
+                <span className="font-body text-sm">info@spartaincdev.com</span>
               </a>
             </div>
           </div>
