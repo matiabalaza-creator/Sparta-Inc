@@ -105,6 +105,161 @@ const BudgetEstimator = () => {
   );
 };
 
+// --- ANIMATED TRUST & BRANDS BANNER ---
+const TrustMarqueeBanner = () => {
+  const marqueeVariants = {
+    animate: {
+      x: [0, -1036],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: "loop",
+          duration: 25,
+          ease: "linear",
+        },
+      },
+    },
+  };
+
+  return (
+    <div className="bg-[#111111] border-y border-gray-800 overflow-hidden py-4 w-full relative z-20 shadow-2xl">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
+        
+        {/* Left Side: Verification & Years */}
+        <div className="flex items-center gap-6 md:gap-12 min-w-max border-b lg:border-b-0 lg:border-r border-gray-800 pb-4 lg:pb-0 lg:pr-12">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full border-2 border-white/20 flex items-center justify-center bg-white/5">
+              <CheckCircle className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <p className="text-white font-bold text-sm">Verified By</p>
+              <p className="text-gray-400 text-xs">Uganda Communications<br/>Commission</p>
+            </div>
+          </div>
+          
+          <div className="flex flex-col">
+            <p className="text-gray-400 text-xs font-medium mb-1">Running Strong</p>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="text-3xl font-black text-white flex items-center"
+            >
+              7+ Years
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Right Side: Animated Brand Marquee */}
+        <div className="flex-1 overflow-hidden relative w-full flex items-center">
+          <p className="text-gray-400 text-xs font-medium absolute left-0 z-10 bg-[#111111] pr-4 h-full flex items-center">
+            Brands That Trust Us
+          </p>
+          
+          <div className="absolute left-28 top-0 bottom-0 w-16 bg-gradient-to-r from-[#111111] to-transparent z-10"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#111111] to-transparent z-10"></div>
+
+          <div className="overflow-hidden w-full ml-32">
+            <motion.div 
+              variants={marqueeVariants}
+              animate="animate"
+              className="flex items-center gap-16 whitespace-nowrap"
+            >
+              {[...Array(2)].map((_, index) => (
+                <React.Fragment key={index}>
+                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">DHL</span>
+                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer italic">ABF Freight</span>
+                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">JUMA HOMES</span>
+                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer tracking-widest">SUZUKI</span>
+                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">MTN</span>
+                </React.Fragment>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// --- ANIMATED AWARDS BANNER ---
+const AwardsBanner = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const badgeVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.9 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { type: "spring", stiffness: 100 }
+    }
+  };
+
+  const badges = [
+    { title: "Quality Choice", year: "2024", color: "bg-blue-600" },
+    { title: "Top Winner", year: "2022", color: "bg-indigo-600" },
+    { title: "High Performer", year: "Summer 2023", color: "bg-orange-500", shape: "square" },
+    { title: "Happiest Users", year: "2024", color: "bg-emerald-500" },
+    { title: "Top Rated", year: "Software", color: "bg-blue-800" },
+  ];
+
+  return (
+    <section className="py-16 bg-white border-b border-gray-100 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12">
+        
+        {/* Left Side: Text */}
+        <div className="max-w-md">
+          <p className="text-green-600 font-semibold mb-2">Testimonials</p>
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Recognized for Excellence</h2>
+          <p className="text-gray-500 leading-relaxed">
+            At Sparta Inc Developers, we deliver top quality designs and exceptional service, consistently exceeding client expectations across Uganda.
+          </p>
+        </div>
+
+        {/* Right Side: Animated Badges */}
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="flex flex-wrap justify-center lg:justify-end gap-6 md:gap-8 flex-1"
+        >
+          {badges.map((badge, i) => (
+            <motion.div key={i} variants={badgeVariants} className="flex flex-col items-center">
+              <div className={`
+                ${badge.color} text-white flex flex-col items-center justify-center p-4 shadow-lg
+                ${badge.shape === 'square' ? 'rounded-xl w-24 h-28' : 'rounded-full w-28 h-28 border-4 border-white outline outline-2 outline-gray-200'}
+              `}>
+                <CheckCircle className="w-5 h-5 mb-1 opacity-80" />
+                <span className="text-xs font-bold text-center leading-tight uppercase">{badge.title}</span>
+                <div className="w-8 h-[1px] bg-white/40 my-1"></div>
+                <span className="text-[10px] font-bold tracking-wider">{badge.year}</span>
+              </div>
+              
+              <div className="flex mt-3 text-yellow-400">
+                {[...Array(5)].map((_, starIndex) => (
+                  <svg key={starIndex} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+              </div>
+              <span className="text-gray-500 font-bold text-sm mt-1">4.5 / 5</span>
+            </motion.div>
+          ))}
+        </motion.div>
+
+      </div>
+    </section>
+  );
+};
 
 // --- MAIN APP COMPONENT ---
 export default function App() {
@@ -207,7 +362,6 @@ export default function App() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="flex-1 w-full max-w-lg relative"
           >
-            {/* Subtle floating animation */}
             <motion.div 
               animate={{ y: [-10, 10, -10] }} 
               transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
@@ -240,6 +394,9 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+
+      {/* TRUST & BRANDS MARQUEE BANNER */}
+      <TrustMarqueeBanner />
 
       {/* SERVICES SECTION */}
       <section id="services" className="py-20 bg-white">
@@ -300,6 +457,9 @@ export default function App() {
         </div>
       </section>
 
+      {/* AWARDS & RECOGNITION BANNER */}
+      <AwardsBanner />
+
       {/* PORTFOLIO SHOWCASE */}
       <section id="portfolio" className="py-20 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -312,7 +472,6 @@ export default function App() {
             {/* Project 1 */}
             <div className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700">
               <div className="h-64 bg-gray-700 relative p-8 flex items-center justify-center overflow-hidden group">
-                 {/* Abstract visual representation instead of missing image */}
                  <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-gray-800 transition-transform group-hover:scale-105 duration-500"></div>
                  <h3 className="text-3xl font-bold text-white/20 z-10">LANDMARK <br/>JUNIOR SCHOOL</h3>
               </div>
