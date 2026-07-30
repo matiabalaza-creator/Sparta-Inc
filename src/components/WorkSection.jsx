@@ -1,110 +1,32 @@
-import { motion } from 'framer-motion'
-import { TrendingUp } from 'lucide-react'
-import BeforeAfterSlider from './BeforeAfterSlider.jsx'
-
-const PROJECTS = [
-  {
-    name: 'Kla Fashion Hub',
-    category: 'Retail · Kampala Road',
-    metric: '+150% WhatsApp orders',
-    detail: 'Replaced a Facebook-only storefront with a fast catalog site and one-tap WhatsApp checkout.',
-    beforeImg: '/fashion-before.jpg', 
-    afterImg: '/fashion-after.jpg', // If this stays blank, check if the file on GitHub ends in .png or .jpeg instead!
-  },
-  {
-    name: 'Uganda Logistics Co.',
-    category: 'Logistics · Nakawa',
-    metric: 'MoMo drop-offs down 40%',
-    detail: 'Rebuilt a clunky quote form into a guided flow with inline Mobile Money confirmation.',
-    beforeImg: '/logistics-before.jpg', 
-    afterImg: '/logistics-after.jpg',  
-  },
-]
+import React from 'react';
 
 export default function WorkSection() {
   return (
-    <section id="work" className="relative mx-auto max-w-7xl px-5 py-24 md:px-10 md:py-32">
-      <div className="mb-14 max-w-2xl">
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.5 }}
-          className="eyebrow font-body mb-5 text-xs"
-          style={{ color: 'var(--accent)' }}
-        >
-          Business-first, not portfolio-first
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 14 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.6, delay: 0.05 }}
-          className="font-display text-3xl leading-tight sm:text-4xl"
-          style={{ color: 'var(--text-primary)' }}
-        >
-          Drag the handle. See what a rebuild actually changes.
-        </motion.h2>
-      </div>
+    <section className="py-16 bg-slate-900 text-white">
+      <div className="max-w-6xl mx-auto px-4 text-center">
+        <h2 className="text-3xl font-bold mb-3">How We Build Your Business Website</h2>
+        <p className="text-slate-400 mb-12">From initial idea to launch, we handle everything seamlessly.</p>
 
-      <div className="grid gap-10 lg:grid-cols-2 lg:gap-8">
-        {PROJECTS.map((p, i) => (
-          <motion.article
-            key={p.name}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
-          >
-            {/* Before After Slider - Bottom labels removed */}
-            <BeforeAfterSlider
-              before={
-                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-900 rounded-md">
-                  <img 
-                    src={p.beforeImg} 
-                    alt={`${p.name} Old Site`} 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              }
-              after={
-                <div className="relative h-[250px] sm:h-[320px] w-full overflow-hidden bg-zinc-955 extrinsic-box bg-zinc-950 rounded-md">
-                  <img 
-                    src={p.afterImg} 
-                    alt={`${p.name} Custom Rebuild`} 
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              }
-            />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 text-left">
+            <div className="w-10 h-10 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold mb-4">1</div>
+            <h3 className="text-xl font-semibold mb-2">1. Strategy & Design</h3>
+            <p className="text-slate-400 text-sm">We map out your business goals and design a modern, high-converting, mobile-friendly interface.</p>
+          </div>
 
-            <div className="mt-5 flex items-start justify-between gap-4">
-              <div>
-                <h3 className="font-display text-lg" style={{ color: 'var(--text-primary)' }}>
-                  {p.name}
-                </h3>
-                <p className="font-body text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                  {p.category}
-                </p>
-              </div>
-              <span
-                className="theme-transition inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap px-3 py-1.5 text-xs font-medium"
-                style={{
-                  borderRadius: 'var(--control-radius)',
-                  backgroundColor: 'var(--accent-soft)',
-                  color: 'var(--accent)',
-                }}
-              >
-                <TrendingUp size={13} />
-                {p.metric}
-              </span>
-            </div>
-            <p className="font-body mt-3 text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              {p.detail}
-            </p>
-          </motion.article>
-        ))}
+          <div className="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 text-left">
+            <div className="w-10 h-10 rounded-lg bg-amber-600/20 text-amber-400 flex items-center justify-center font-bold mb-4">2</div>
+            <h3 className="text-xl font-semibold mb-2">2. Local Integration</h3>
+            <p className="text-slate-400 text-sm">We integrate key local features like MTN/Airtel MoMo payment flows and direct WhatsApp ordering.</p>
+          </div>
+
+          <div className="bg-slate-800/60 p-6 rounded-2xl border border-slate-700 text-left">
+            <div className="w-10 h-10 rounded-lg bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold mb-4">3</div>
+            <h3 className="text-xl font-semibold mb-2">3. Launch & Growth</h3>
+            <p className="text-slate-400 text-sm">We deploy your website on super-fast cloud servers, optimize SEO, and provide full ongoing support.</p>
+          </div>
+        </div>
       </div>
     </section>
-  )
+  );
 }
