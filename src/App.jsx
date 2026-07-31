@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Menu, X, ArrowRight, Code, Layout, ShoppingCart, 
-  Search, CheckCircle, Calculator, Mail, Phone, MapPin, Smartphone
+  Search, CheckCircle, Calculator, Mail, Phone, MapPin, Smartphone,
+  Zap, ShieldCheck, HeartHandshake, TrendingUp
 } from 'lucide-react';
 
 // --- SEO SCHEMA COMPONENT ---
@@ -62,7 +63,7 @@ const BudgetEstimator = () => {
           <select 
             value={projectType}
             onChange={(e) => setProjectType(e.target.value)}
-            className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all"
+            className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all bg-white"
           >
             <option value="corporate">Corporate / Institutional Website</option>
             <option value="ecommerce">E-Commerce & Retail</option>
@@ -276,6 +277,39 @@ export default function App() {
     visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
   };
 
+  const whyChooseUsData = [
+    {
+      icon: <Zap className="w-8 h-8 text-blue-600" />,
+      title: "Blazing Fast Speed",
+      description: "We write clean, lightweight code engineered to load in under 2 seconds even on slow mobile networks."
+    },
+    {
+      icon: <Smartphone className="w-8 h-8 text-blue-600" />,
+      title: "Mobile Money Native",
+      description: "Built-in automated checkout systems for MTN MoMo and Airtel Money to increase conversion rates."
+    },
+    {
+      icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
+      title: "Kampala Local SEO",
+      description: "Custom local schema and performance tuning to position your brand at the top of local search queries."
+    },
+    {
+      icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+      title: "Bank-Grade Security",
+      description: "End-to-end encryption, automated cloud backups, and DDoS protection for zero business downtime."
+    },
+    {
+      icon: <HeartHandshake className="w-8 h-8 text-blue-600" />,
+      title: "Dedicated Local Support",
+      description: "Direct WhatsApp line to developers who understand the local market context and respond instantly."
+    },
+    {
+      icon: <Code className="w-8 h-8 text-blue-600" />,
+      title: "No Bloated Templates",
+      description: "Custom architecture built precisely for your unique business workflows instead of generic plugins."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-blue-200 selection:text-blue-900">
       <SEOSchema />
@@ -296,6 +330,7 @@ export default function App() {
                 Kampala, Uganda
               </div>
               <a href="#services" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Services</a>
+              <a href="#why-us" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Why Us</a>
               <a href="#portfolio" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Portfolio</a>
               <a href="#pricing" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Pricing</a>
               <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center shadow-md hover:shadow-lg">
@@ -315,6 +350,7 @@ export default function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-xl absolute w-full">
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Services</a>
+            <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Why Us</a>
             <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Portfolio</a>
             <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing Calculator</a>
             <a href="https://wa.me/256764110535" className="block w-full text-center mt-4 bg-blue-600 text-white px-5 py-3 rounded-lg font-medium">Get Started Today</a>
@@ -459,6 +495,41 @@ export default function App() {
 
       {/* AWARDS & RECOGNITION BANNER */}
       <AwardsBanner />
+
+      {/* WHY CHOOSE US SECTION */}
+      <section id="why-us" className="py-20 bg-gray-50 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">The Sparta Advantage</span>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-2 mb-4">Why Businesses Partner With Us</h2>
+            <p className="text-gray-600 text-lg">We don't just build websites; we engineer scalable digital assets tailored to the Ugandan operating environment.</p>
+          </div>
+
+          <motion.div 
+            variants={staggerContainer} 
+            initial="hidden" 
+            whileInView="visible" 
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {whyChooseUsData.map((item, index) => (
+              <motion.div 
+                key={index}
+                variants={fadeUp}
+                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
 
       {/* PORTFOLIO SHOWCASE */}
       <section id="portfolio" className="py-20 bg-gray-900 text-white">
