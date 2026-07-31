@@ -1,76 +1,95 @@
-export default function SolutionsSection() {
-  const solutions = [
-    {
-      title: "Educational & Institutional Portals",
-      description: "Custom web systems designed for schools and institutions to manage admissions, digital fee structures, and parent-teacher communication effortlessly.",
-      badge: "School Systems",
-      badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
-      icon: (
-        <svg className="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-        </svg>
-      )
-    },
-    {
-      title: "Mobile Money E-Commerce & Retail",
-      description: "High-converting online stores integrated directly with MTN MoMo, Airtel Money, and automated WhatsApp order routing for instant sales.",
-      badge: "Automated Payments",
-      badgeColor: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-      icon: (
-        <svg className="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 100 4 2 2 0 000-4z" />
-        </svg>
-      )
-    },
-    {
-      title: "Custom Business Dashboards & Portals",
-      description: "Tailor-made web applications that replace messy spreadsheets with clean, real-time analytics, inventory tracking, and client management tools.",
-      badge: "Enterprise Tech",
-      badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
-      icon: (
-        <svg className="w-12 h-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      )
-    }
-  ];
+import React from 'react';
 
+const featuredCapabilities = [
+  {
+    id: 1,
+    title: "Interactive E-Commerce & MoMo Checkout Engine",
+    category: "Live Prototype Showcase",
+    description: "Experience how we streamline local transactions in Uganda. A friction-free checkout flow integrating Mobile Money routing and direct-to-WhatsApp order dispatch.",
+    features: ["MTN / Airtel MoMo Flow", "Instant WhatsApp Order Routing", "Zero-Latency UI"],
+    badge: "Interactive Demo Ready",
+    badgeColor: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20",
+    icon: (
+      <svg className="w-10 h-10 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 2 2 002-2V8a2 2 2 002-2H5a2 2 2 002 2v8a2 2 2 002 2z" />
+      </svg>
+    )
+  },
+  {
+    id: 2,
+    title: "High-Performance Web Architecture Benchmark",
+    category: "Performance & UX Engineering",
+    description: "A side-by-side technical breakdown showing how custom clean-code architecture outperforms bloated template builders in load speeds, SEO ranking, and conversion rates.",
+    features: ["Sub-Second Load Speed", "Mobile Optimization", "SEO Core Web Vitals Ready"],
+    badge: "Live Benchmark",
+    badgeColor: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    icon: (
+      <svg className="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    )
+  }
+];
+
+export default function WorkSection() {
   return (
-    <section className="py-16 px-4 max-w-7xl mx-auto">
-      <div className="mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
-          Solutions We Deliver
+    <section className="py-20 bg-[#0B0F19] text-white px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto text-left mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
+          Solutions & Engineering
         </h2>
-        <p className="text-slate-400 text-lg">
-          Modern, scalable digital systems built for growing businesses and institutions.
+        <p className="mt-2 text-lg text-slate-400">
+          Explore interactive demonstrations of the modern web solutions we engineer.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {solutions.map((item, idx) => (
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredCapabilities.map((item) => (
           <div 
-            key={idx}
-            className="bg-[#131b2e] border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition duration-300"
+            key={item.id}
+            className="flex flex-col justify-between rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700 transition-all duration-300 overflow-hidden group shadow-xl p-8"
           >
             <div>
-              {/* Graphic Placeholder Box */}
-              <div className="w-full h-44 bg-[#1a243a] rounded-xl flex items-center justify-center mb-6">
-                {item.icon}
+              {/* Header Icon & Tag */}
+              <div className="flex items-center justify-between mb-6">
+                <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 group-hover:scale-105 transition-transform duration-300">
+                  {item.icon}
+                </div>
+                <span className={`text-xs font-medium px-3 py-1 rounded-full border ${item.badgeColor}`}>
+                  {item.badge}
+                </span>
               </div>
 
-              <h3 className="text-xl font-bold text-white mb-3">
+              {/* Title & Category */}
+              <span className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
+                {item.category}
+              </span>
+              <h3 className="text-2xl font-bold text-slate-100 mt-1 mb-3">
                 {item.title}
               </h3>
 
-              <p className="text-slate-400 text-sm leading-relaxed mb-6">
+              <p className="text-slate-300 text-sm leading-relaxed mb-6">
                 {item.description}
               </p>
+
+              {/* Technical Feature Tags */}
+              <div className="flex flex-wrap gap-2 mb-8">
+                {item.features.map((feature, idx) => (
+                  <span 
+                    key={idx}
+                    className="text-xs px-3 py-1 rounded-md bg-slate-800/80 text-slate-300 border border-slate-700/50"
+                  >
+                    {feature}
+                  </span>
+                ))}
+              </div>
             </div>
 
-            <div>
-              <span className={`inline-block px-3 py-1 text-xs font-semibold rounded-full border ${item.badgeColor}`}>
-                {item.badge}
+            {/* Bottom Action Line */}
+            <div className="pt-4 border-t border-slate-800/80 flex items-center justify-between">
+              <span className="text-xs text-slate-500">Built in React & Tailwind</span>
+              <span className="text-sm font-semibold text-slate-200 group-hover:text-white transition-colors flex items-center gap-1">
+                Explore Feature →
               </span>
             </div>
           </div>
