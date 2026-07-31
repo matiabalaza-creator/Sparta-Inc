@@ -4,7 +4,7 @@ import {
   Menu, X, ArrowRight, Code, Layout, ShoppingCart, 
   Search, CheckCircle, Calculator, Mail, Phone, MapPin, Smartphone,
   Zap, ShieldCheck, HeartHandshake, TrendingUp, GraduationCap, Building2,
-  PackageCheck, ArrowUpRight
+  PackageCheck, ArrowUpRight, Sparkles, Check, Globe, MessageSquare
 } from 'lucide-react';
 
 // --- SEO SCHEMA COMPONENT ---
@@ -37,70 +37,156 @@ const SEOSchema = () => {
   );
 };
 
-// --- BUDGET ESTIMATOR COMPONENT ---
-const BudgetEstimator = () => {
+// --- PROJECT SCOPE BUILDER COMPONENT (REPLACES SCARY PRICE CALCULATOR) ---
+const ProjectScopeBuilder = () => {
   const [projectType, setProjectType] = useState('corporate');
-  const [pages, setPages] = useState(4);
-  const [needsMomo, setNeedsMomo] = useState(false);
+  const [timeline, setTimeline] = useState('standard');
+  const [needsMomo, setNeedsMomo] = useState(true);
+  const [needsSeo, setNeedsSeo] = useState(true);
 
-  const calculateEstimate = () => {
-    let base = projectType === 'corporate' ? 1200000 : projectType === 'ecommerce' ? 2000000 : 3500000;
-    let pageCost = (pages - 4) * 150000;
-    let momoCost = needsMomo ? 800000 : 0;
-    
-    return (base + (pageCost > 0 ? pageCost : 0) + momoCost).toLocaleString();
+  const getWhatsAppLink = () => {
+    const typeLabel = projectType === 'corporate' 
+      ? 'Corporate / Institutional Website' 
+      : projectType === 'ecommerce' 
+      ? 'E-Commerce Storefront' 
+      : 'Custom Web Application';
+      
+    const timeLabel = timeline === 'express' ? 'Express (5-7 Days)' : 'Standard (2-3 Weeks)';
+    const momoLabel = needsMomo ? 'Yes' : 'No';
+    const seoLabel = needsSeo ? 'Yes' : 'No';
+
+    const message = `Hello Sparta Inc! 👋 I'm interested in starting a project:\n\n` +
+      `• Project Type: ${typeLabel}\n` +
+      `• Desired Timeline: ${timeLabel}\n` +
+      `• Mobile Money Integration: ${momoLabel}\n` +
+      `• Local SEO Package: ${seoLabel}\n\n` +
+      `Could we discuss a tailored quote for this scope?`;
+
+    return `https://wa.me/256764110535?text=${encodeURIComponent(message)}`;
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 max-w-2xl mx-auto">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-        <Calculator className="w-6 h-6 mr-3 text-blue-600" />
-        Instant Project Estimator
-      </h3>
-      
+    <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-100 max-w-3xl mx-auto">
+      <div className="flex items-center space-x-3 mb-6">
+        <div className="p-2.5 bg-blue-50 rounded-xl text-blue-600">
+          <Sparkles className="w-6 h-6" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-gray-900">Build Your Project Scope</h3>
+          <p className="text-sm text-gray-500">Select your requirements to receive a custom tailored proposal.</p>
+        </div>
+      </div>
+
       <div className="space-y-6">
+        {/* Project Type */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
-          <select 
-            value={projectType}
-            onChange={(e) => setProjectType(e.target.value)}
-            className="w-full p-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all bg-white"
+          <label className="block text-sm font-semibold text-gray-700 mb-2">What are you looking to build?</label>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {[
+              { id: 'corporate', label: 'Corporate Website', icon: <Globe className="w-4 h-4" /> },
+              { id: 'ecommerce', label: 'E-Commerce Store', icon: <ShoppingCart className="w-4 h-4" /> },
+              { id: 'webapp', label: 'Custom Web App', icon: <Zap className="w-4 h-4" /> }
+            ].map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setProjectType(item.id)}
+                className={`p-4 rounded-xl border text-left text-sm font-semibold transition-all flex flex-col justify-between h-24 ${
+                  projectType === item.id
+                    ? 'border-blue-600 bg-blue-50/50 text-blue-700 ring-2 ring-blue-600/20'
+                    : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                }`}
+              >
+                <span className={projectType === item.id ? 'text-blue-600' : 'text-gray-400'}>{item.icon}</span>
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Timeline Preference */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Target Completion Timeline</label>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {[
+              { id: 'standard', label: 'Standard Delivery', sub: '2 - 3 Weeks (Recommended)' },
+              { id: 'express', label: 'Express Delivery', sub: '5 - 7 Days (Fast-Track)' }
+            ].map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setTimeline(item.id)}
+                className={`p-3.5 rounded-xl border text-left transition-all ${
+                  timeline === item.id
+                    ? 'border-blue-600 bg-blue-50/50 text-blue-700 ring-2 ring-blue-600/20'
+                    : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                }`}
+              >
+                <div className="text-sm font-bold">{item.label}</div>
+                <div className="text-xs text-gray-500 mt-0.5">{item.sub}</div>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Add-ons */}
+        <div className="space-y-3 pt-2">
+          <label className="block text-sm font-semibold text-gray-700">Recommended Enhancements</label>
+          
+          <label className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <input 
+                type="checkbox" 
+                checked={needsMomo}
+                onChange={(e) => setNeedsMomo(e.target.checked)}
+                className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+              />
+              <div>
+                <p className="text-sm font-bold text-gray-900">MTN & Airtel MoMo Gateway + WhatsApp Routing</p>
+                <p className="text-xs text-gray-500">Allow customers to pay via local mobile money or send orders to WhatsApp</p>
+              </div>
+            </div>
+          </label>
+
+          <label className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+            <div className="flex items-center space-x-3">
+              <input 
+                type="checkbox" 
+                checked={needsSeo}
+                onChange={(e) => setNeedsSeo(e.target.checked)}
+                className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+              />
+              <div>
+                <p className="text-sm font-bold text-gray-900">Kampala Local SEO & Google Search Setup</p>
+                <p className="text-xs text-gray-500">Optimization to ensure your business ranks high on Google local searches</p>
+              </div>
+            </div>
+          </label>
+        </div>
+
+        {/* Value Summary Card */}
+        <div className="mt-8 p-6 bg-gradient-to-br from-gray-900 to-blue-950 text-white rounded-2xl shadow-lg">
+          <p className="text-xs uppercase tracking-wider text-blue-400 font-bold mb-2">Included with your build:</p>
+          <div className="grid grid-cols-2 gap-2 text-xs text-gray-300 mb-6">
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> 100% Mobile Responsive</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> High-Speed Cloud Hosting</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> Free Security SSL Certificate</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> 30 Days Free Maintenance</span>
+          </div>
+
+          <a
+            href={getWhatsAppLink()}
+            target="_blank"
+            rel="noreferrer"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 px-6 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all shadow-md hover:shadow-blue-500/20 text-sm md:text-base"
           >
-            <option value="corporate">Corporate / Institutional Website</option>
-            <option value="ecommerce">E-Commerce & Retail</option>
-            <option value="webapp">Custom Web Application / Dashboard</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Number of Pages ({pages})
-          </label>
-          <input 
-            type="range" min="1" max="20" 
-            value={pages}
-            onChange={(e) => setPages(parseInt(e.target.value))}
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
-          />
-        </div>
-
-        <div className="flex items-center space-x-3">
-          <input 
-            type="checkbox" 
-            id="momo"
-            checked={needsMomo}
-            onChange={(e) => setNeedsMomo(e.target.checked)}
-            className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-          />
-          <label htmlFor="momo" className="text-sm font-medium text-gray-700">
-            Include MTN/Airtel MoMo & WhatsApp Order Routing
-          </label>
-        </div>
-
-        <div className="mt-8 p-6 bg-blue-50 rounded-xl border border-blue-100">
-          <p className="text-sm text-blue-800 font-medium mb-1">Estimated Investment (UGX)</p>
-          <p className="text-4xl font-bold text-blue-900">{calculateEstimate()} /=</p>
-          <p className="text-xs text-blue-600 mt-2">*This is an indicative estimate. Final cost depends on exact feature scope.</p>
+            <MessageSquare className="w-5 h-5" />
+            <span>Get Tailored Proposal on WhatsApp</span>
+            <ArrowRight className="w-5 h-5" />
+          </a>
+          <p className="text-center text-[11px] text-gray-400 mt-2.5">
+            Instant response • No obligation • Custom scope review
+          </p>
         </div>
       </div>
     </div>
@@ -548,7 +634,7 @@ export default function App() {
               <a href="#services" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Services</a>
               <a href="#why-us" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Why Us</a>
               <a href="#solutions" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Solutions</a>
-              <a href="#pricing" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Pricing</a>
+              <a href="#proposal" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Proposal</a>
               <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center shadow-md hover:shadow-lg">
                 Get Started
               </a>
@@ -568,7 +654,7 @@ export default function App() {
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Services</a>
             <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Why Us</a>
             <a href="#solutions" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Solutions</a>
-            <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing Calculator</a>
+            <a href="#proposal" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Request Proposal</a>
             <a href="https://wa.me/256764110535" className="block w-full text-center mt-4 bg-blue-600 text-white px-5 py-3 rounded-lg font-medium">Get Started Today</a>
           </div>
         )}
@@ -595,8 +681,8 @@ export default function App() {
               Over 7 years of building reliable digital infrastructure. We turn slow, outdated sites into fast, client-converting machines equipped with automated local payment integrations.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#pricing" className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-xl hover:shadow-2xl flex items-center justify-center">
-                Estimate Project Cost
+              <a href="#proposal" className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-xl hover:shadow-2xl flex items-center justify-center">
+                Build Project Scope
                 <ArrowRight className="ml-2 w-5 h-5" />
               </a>
               <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-semibold transition-all flex items-center justify-center">
@@ -742,14 +828,18 @@ export default function App() {
       {/* ANIMATED & INTERACTIVE INDUSTRY SHOWCASE SECTION */}
       <InteractiveIndustryShowcase />
 
-      {/* PRICING ESTIMATOR */}
-      <section id="pricing" className="py-24 bg-gray-50">
+      {/* PROPOSAL & SCOPE BUILDER (REPLACED PRICING CALCULATOR) */}
+      <section id="proposal" className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
-            <p className="text-gray-600 text-lg">No hidden fees. Use our calculator to get an immediate estimate for your project scope.</p>
+            <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">Tailored Execution</span>
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-1 mb-4">Request a Project Proposal</h2>
+            <p className="text-gray-600 text-lg">
+              Every business has unique requirements. Select your scope below for a free, customized project roadmap and quote.
+            </p>
           </div>
-          <BudgetEstimator />
+          
+          <ProjectScopeBuilder />
         </div>
       </section>
 
@@ -793,7 +883,7 @@ export default function App() {
               <ul className="space-y-3 text-gray-600">
                 <li><a href="#services" className="hover:text-blue-600">Web Design</a></li>
                 <li><a href="#solutions" className="hover:text-blue-600">Industry Solutions</a></li>
-                <li><a href="#pricing" className="hover:text-blue-600">Pricing Calculator</a></li>
+                <li><a href="#proposal" className="hover:text-blue-600">Request Proposal</a></li>
                 <li><a href="#why-us" className="hover:text-blue-600">Why Us</a></li>
               </ul>
             </div>
