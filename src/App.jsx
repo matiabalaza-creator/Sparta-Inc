@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, ArrowRight, Code, Layout, ShoppingCart, 
   Search, CheckCircle, Calculator, Mail, Phone, MapPin, Smartphone,
-  Zap, ShieldCheck, HeartHandshake, TrendingUp
+  Zap, ShieldCheck, HeartHandshake, TrendingUp, GraduationCap, Building2,
+  PackageCheck, ArrowUpRight
 } from 'lucide-react';
 
 // --- SEO SCHEMA COMPONENT ---
@@ -44,7 +45,7 @@ const BudgetEstimator = () => {
 
   const calculateEstimate = () => {
     let base = projectType === 'corporate' ? 1200000 : projectType === 'ecommerce' ? 2000000 : 3500000;
-    let pageCost = (pages - 4) * 150000; // 150k UGX per extra page above 4
+    let pageCost = (pages - 4) * 150000;
     let momoCost = needsMomo ? 800000 : 0;
     
     return (base + (pageCost > 0 ? pageCost : 0) + momoCost).toLocaleString();
@@ -125,8 +126,6 @@ const TrustMarqueeBanner = () => {
   return (
     <div className="bg-[#111111] border-y border-gray-800 overflow-hidden py-4 w-full relative z-20 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
-        
-        {/* Left Side: Verification & Years */}
         <div className="flex items-center gap-6 md:gap-12 min-w-max border-b lg:border-b-0 lg:border-r border-gray-800 pb-4 lg:pb-0 lg:pr-12">
           <div className="flex items-center gap-3">
             <div className="w-12 h-12 rounded-full border-2 border-white/20 flex items-center justify-center bg-white/5">
@@ -140,23 +139,16 @@ const TrustMarqueeBanner = () => {
           
           <div className="flex flex-col">
             <p className="text-gray-400 text-xs font-medium mb-1">Running Strong</p>
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="text-3xl font-black text-white flex items-center"
-            >
+            <div className="text-3xl font-black text-white flex items-center">
               7+ Years
-            </motion.div>
+            </div>
           </div>
         </div>
 
-        {/* Right Side: Animated Brand Marquee */}
         <div className="flex-1 overflow-hidden relative w-full flex items-center">
           <p className="text-gray-400 text-xs font-medium absolute left-0 z-10 bg-[#111111] pr-4 h-full flex items-center">
             Brands That Trust Us
           </p>
-          
           <div className="absolute left-28 top-0 bottom-0 w-16 bg-gradient-to-r from-[#111111] to-transparent z-10"></div>
           <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#111111] to-transparent z-10"></div>
 
@@ -178,7 +170,6 @@ const TrustMarqueeBanner = () => {
             </motion.div>
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -215,8 +206,6 @@ const AwardsBanner = () => {
   return (
     <section className="py-16 bg-white border-b border-gray-100 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12">
-        
-        {/* Left Side: Text */}
         <div className="max-w-md">
           <p className="text-green-600 font-semibold mb-2">Testimonials</p>
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Recognized for Excellence</h2>
@@ -225,7 +214,6 @@ const AwardsBanner = () => {
           </p>
         </div>
 
-        {/* Right Side: Animated Badges */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -256,6 +244,235 @@ const AwardsBanner = () => {
             </motion.div>
           ))}
         </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// --- INTERACTIVE & ANIMATED INDUSTRY SHOWCASE SECTION ---
+const InteractiveIndustryShowcase = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const niches = [
+    {
+      id: "schools",
+      icon: <GraduationCap className="w-6 h-6" />,
+      title: "Schools & Academies",
+      tagline: "Automated Admissions & Parent Portals",
+      description: "We eliminate administrative bottlenecks for educational institutions with self-service admission forms, printable prospectus views, and direct WhatsApp enrollment inquiries.",
+      metrics: ["+300% Online Inquiries", "100% Mobile Friendly", "Instant MoMo Fee Collection"],
+      features: [
+        "Online Student Admission Engine",
+        "Termly Fee Structure & Downloadable Prospectus",
+        "Direct Parent WhatsApp & Email Routing",
+        "Staff Directory & Campus News Bulletin"
+      ],
+      previewHeadline: "Landmark Academy Web Portal",
+      previewSub: "Live Demo Architecture"
+    },
+    {
+      id: "realestate",
+      icon: <Building2 className="w-6 h-6" />,
+      title: "Real Estate & Housing",
+      tagline: "High-Converting Listing Engines",
+      description: "Empower agents and property developers to showcase listings with interactive property filters, high-resolution galleries, location mapping, and automated site-visit bookings.",
+      metrics: ["Filter by Rent / Sale", "Instant Agent Call Button", "Virtual Tour Ready"],
+      features: [
+        "Dynamic Property Search (Price, Beds, Location)",
+        "WhatsApp Inspection Request System",
+        "Interactive Google Map Location Pins",
+        "Mortgage / Monthly Payment Estimator Widget"
+      ],
+      previewHeadline: "Kampala Heights Listing Engine",
+      previewSub: "Real Estate Portal Blueprint"
+    },
+    {
+      id: "ecommerce",
+      icon: <ShoppingCart className="w-6 h-6" />,
+      title: "E-Commerce & Retail",
+      tagline: "Frictionless Local Checkout Systems",
+      description: "Turn casual browsers into paying customers by accepting mobile payment methods natively alongside automated order alerts sent straight to your delivery team.",
+      metrics: ["MTN MoMo API Native", "Airtel Money Ready", "Automated WhatsApp Invoice"],
+      features: [
+        "Direct MTN & Airtel Mobile Money Checkout",
+        "Instant Order Routing to Delivery WhatsApp",
+        "Automated Low-Stock Inventory Alerts",
+        "Discount Coupon & Flash Sale Manager"
+      ],
+      previewHeadline: "Retail Dashboard & Express Checkout",
+      previewSub: "E-Commerce System Blueprint"
+    },
+    {
+      id: "logistics",
+      icon: <PackageCheck className="w-6 h-6" />,
+      title: "Logistics & Freight",
+      tagline: "Real-Time Tracking & Quote Calculators",
+      description: "Build client confidence for transport agencies, clearing firms, and fleet managers with instant shipping cost calculators and tracking updates.",
+      metrics: ["Automated Cost Quotes", "Fleet Capability Showcase", "24/7 Client Support Portal"],
+      features: [
+        "Instant Cargo & Freight Quote Calculator",
+        "Shipment Status & Waybill Lookup UI",
+        "Service Route & Warehouse Directory",
+        "B2B Corporate Account Inquiry Forms"
+      ],
+      previewHeadline: "Equator Freight & Transit Hub",
+      previewSub: "Logistics Application Blueprint"
+    }
+  ];
+
+  const current = niches[activeTab];
+
+  return (
+    <section id="solutions" className="py-24 bg-[#0a0f1d] text-white relative overflow-hidden">
+      {/* Background glow effects */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-10 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-blue-400 font-semibold text-sm tracking-widest uppercase">Tailored Architectures</span>
+          <h2 className="text-3xl md:text-5xl font-black mt-2 mb-4 tracking-tight">How We Build For Your Industry</h2>
+          <p className="text-gray-400 text-base md:text-lg">
+            We don't use generic templates. Select your niche below to explore the custom features and interactive flows we engineer for your business.
+          </p>
+        </div>
+
+        {/* Tab Buttons */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {niches.map((niche, idx) => {
+            const isActive = activeTab === idx;
+            return (
+              <button
+                key={niche.id}
+                onClick={() => setActiveTab(idx)}
+                className={`flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 relative ${
+                  isActive 
+                    ? "text-white shadow-lg shadow-blue-500/20" 
+                    : "text-gray-400 bg-gray-900/60 border border-gray-800 hover:text-white hover:bg-gray-800"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabBadge"
+                    className="absolute inset-0 bg-blue-600 rounded-xl"
+                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{niche.icon}</span>
+                <span className="relative z-10">{niche.title}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Animated Showcase Card */}
+        <div className="bg-gray-900/80 border border-gray-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.35, ease: "easeInOut" }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+            >
+              {/* Left Column: Details & Key Features */}
+              <div className="lg:col-span-7 space-y-6">
+                <div>
+                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
+                    {current.tagline}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                    {current.title}
+                  </h3>
+                  <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                    {current.description}
+                  </p>
+                </div>
+
+                {/* Key Metrics / Highlights */}
+                <div className="flex flex-wrap gap-2 py-2">
+                  {current.metrics.map((m, mIdx) => (
+                    <span key={mIdx} className="bg-gray-800/90 text-gray-200 border border-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium">
+                      ⚡ {m}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Feature checklist */}
+                <div className="space-y-3 pt-2">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400">Included Feature Modules:</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {current.features.map((feat, fIdx) => (
+                      <div key={fIdx} className="flex items-start text-xs md:text-sm text-gray-200">
+                        <CheckCircle className="w-4 h-4 text-blue-400 mr-2.5 flex-shrink-0 mt-0.5" />
+                        <span>{feat}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <a 
+                    href="https://wa.me/256764110535" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg text-sm"
+                  >
+                    Request {current.title} Demo
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Live Feature Visual / Interactive Prototype Frame */}
+              <div className="lg:col-span-5">
+                <div className="bg-gray-950 rounded-2xl border border-gray-800 p-6 shadow-inner relative overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                    <div className="flex space-x-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
+                    </div>
+                    <span className="text-[10px] font-mono text-gray-500 tracking-wider">
+                      MODULE PREVIEW
+                    </span>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="p-4 rounded-xl bg-blue-950/40 border border-blue-800/40">
+                      <p className="text-xs text-blue-400 font-mono font-medium">{current.previewSub}</p>
+                      <h4 className="text-lg font-bold text-white mt-1">{current.previewHeadline}</h4>
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
+                        <span>Automated Mobile Checkout</span>
+                        <span className="text-emerald-400 font-mono font-bold">ACTIVE</span>
+                      </div>
+                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
+                        <span>WhatsApp Lead Router</span>
+                        <span className="text-emerald-400 font-mono font-bold">CONNECTED</span>
+                      </div>
+                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
+                        <span>Kampala Local SEO Schema</span>
+                        <span className="text-emerald-400 font-mono font-bold">OPTIMIZED</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-gray-900/60 border border-gray-800 text-center">
+                      <p className="text-xs text-gray-400">Ready to launch in</p>
+                      <p className="text-xl font-extrabold text-blue-400 mt-0.5">5 to 10 Business Days</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
       </div>
     </section>
@@ -266,7 +483,6 @@ const AwardsBanner = () => {
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Animation variants
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -331,7 +547,7 @@ export default function App() {
               </div>
               <a href="#services" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Services</a>
               <a href="#why-us" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Why Us</a>
-              <a href="#portfolio" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Portfolio</a>
+              <a href="#solutions" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Solutions</a>
               <a href="#pricing" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Pricing</a>
               <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center shadow-md hover:shadow-lg">
                 Get Started
@@ -351,7 +567,7 @@ export default function App() {
           <div className="md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-xl absolute w-full">
             <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Services</a>
             <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Why Us</a>
-            <a href="#portfolio" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Portfolio</a>
+            <a href="#solutions" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Solutions</a>
             <a href="#pricing" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing Calculator</a>
             <a href="https://wa.me/256764110535" className="block w-full text-center mt-4 bg-blue-600 text-white px-5 py-3 rounded-lg font-medium">Get Started Today</a>
           </div>
@@ -361,15 +577,13 @@ export default function App() {
       {/* HERO SECTION */}
       <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-4 overflow-hidden">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-          
-          {/* Hero Content */}
           <motion.div 
             initial="hidden" animate="visible" variants={fadeUp}
             className="flex-1 text-center lg:text-left z-10"
           >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-6 border border-blue-100">
               <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
-              Trusted by 50+ Ugandan Businesses
+              Trusted Digital Infrastructure
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1] mb-6">
               Engineering High-Performance <br className="hidden lg:block" />
@@ -391,7 +605,6 @@ export default function App() {
             </div>
           </motion.div>
 
-          {/* Hero Visual Card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -404,7 +617,6 @@ export default function App() {
               className="relative bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 overflow-hidden"
             >
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-10 -mt-10"></div>
-              
               <div className="space-y-6 relative z-10">
                 <div className="flex items-start p-4 bg-gray-50 rounded-xl border border-gray-100">
                   <div className="bg-green-100 p-2 rounded-lg mr-4">
@@ -446,7 +658,6 @@ export default function App() {
             variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
           >
-            {/* Service 1 */}
             <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
               <Layout className="w-12 h-12 text-blue-600 mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Corporate & Institutional Sites</h3>
@@ -457,7 +668,6 @@ export default function App() {
               </ul>
             </motion.div>
 
-            {/* Service 2 */}
             <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
               <Code className="w-12 h-12 text-blue-600 mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Custom Web Applications</h3>
@@ -468,7 +678,6 @@ export default function App() {
               </ul>
             </motion.div>
 
-            {/* Service 3 */}
             <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
               <ShoppingCart className="w-12 h-12 text-blue-600 mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Deep Local E-Commerce</h3>
@@ -479,7 +688,6 @@ export default function App() {
               </ul>
             </motion.div>
 
-            {/* Service 4 */}
             <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
               <Search className="w-12 h-12 text-blue-600 mb-6" />
               <h3 className="text-xl font-bold text-gray-900 mb-3">Local SEO & Brand Storytelling</h3>
@@ -493,7 +701,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* AWARDS & RECOGNITION BANNER */}
+      {/* AWARDS BANNER */}
       <AwardsBanner />
 
       {/* WHY CHOOSE US SECTION */}
@@ -531,47 +739,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* PORTFOLIO SHOWCASE */}
-      <section id="portfolio" className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Featured Work</h2>
-            <p className="text-gray-400 text-lg">Real Ugandan businesses we've transformed.</p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Project 1 */}
-            <div className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700">
-              <div className="h-64 bg-gray-700 relative p-8 flex items-center justify-center overflow-hidden group">
-                 <div className="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-gray-800 transition-transform group-hover:scale-105 duration-500"></div>
-                 <h3 className="text-3xl font-bold text-white/20 z-10">LANDMARK <br/>JUNIOR SCHOOL</h3>
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-2">Landmark Junior School</h3>
-                <p className="text-gray-400 mb-6">Institutional Web Portal built to handle admissions, fee structures, and parent communication.</p>
-                <div className="flex items-center text-green-400 font-medium bg-green-400/10 inline-block px-3 py-1 rounded-full text-sm">
-                  +300% Online Inquiries
-                </div>
-              </div>
-            </div>
-
-            {/* Project 2 */}
-            <div className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700">
-              <div className="h-64 bg-gray-700 relative p-8 flex items-center justify-center overflow-hidden group">
-                 <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/50 to-gray-800 transition-transform group-hover:scale-105 duration-500"></div>
-                 <ShoppingCart className="text-white/20 w-32 h-32 z-10" />
-              </div>
-              <div className="p-8">
-                <h3 className="text-2xl font-bold mb-2">Retail Dashboard & E-Commerce</h3>
-                <p className="text-gray-400 mb-6">Custom business dashboard powering a retail brand in Kampala. Replaced a Facebook page with a high-converting site.</p>
-                <div className="flex items-center text-yellow-400 font-medium bg-yellow-400/10 inline-block px-3 py-1 rounded-full text-sm">
-                  Automated MoMo & WhatsApp Routing
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ANIMATED & INTERACTIVE INDUSTRY SHOWCASE SECTION */}
+      <InteractiveIndustryShowcase />
 
       {/* PRICING ESTIMATOR */}
       <section id="pricing" className="py-24 bg-gray-50">
@@ -580,7 +749,6 @@ export default function App() {
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Transparent Pricing</h2>
             <p className="text-gray-600 text-lg">No hidden fees. Use our calculator to get an immediate estimate for your project scope.</p>
           </div>
-          
           <BudgetEstimator />
         </div>
       </section>
@@ -624,9 +792,9 @@ export default function App() {
               <h4 className="font-bold text-gray-900 mb-6">Quick Links</h4>
               <ul className="space-y-3 text-gray-600">
                 <li><a href="#services" className="hover:text-blue-600">Web Design</a></li>
-                <li><a href="#services" className="hover:text-blue-600">Web Applications</a></li>
-                <li><a href="#services" className="hover:text-blue-600">E-Commerce</a></li>
-                <li><a href="#services" className="hover:text-blue-600">SEO Services</a></li>
+                <li><a href="#solutions" className="hover:text-blue-600">Industry Solutions</a></li>
+                <li><a href="#pricing" className="hover:text-blue-600">Pricing Calculator</a></li>
+                <li><a href="#why-us" className="hover:text-blue-600">Why Us</a></li>
               </ul>
             </div>
           </div>
