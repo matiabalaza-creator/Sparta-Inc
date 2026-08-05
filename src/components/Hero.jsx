@@ -1,274 +1,134 @@
-import { motion } from 'framer-motion'
-import { ArrowDownRight, MessageCircle, Smartphone, Zap, ShieldCheck, Layers } from 'lucide-react'
-
-const WHATSAPP_NUMBER = '256762110535'
-
-// Animation variant for subtle camera drift
-const cameraDrift = {
-  animate: {
-    x: [0, 5, 0],
-    y: [0, 3, 0],
-    transition: {
-      duration: 15,
-      ease: 'linear',
-      repeat: Infinity,
-      repeatType: 'reverse'
-    }
-  }
-}
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Smartphone, Zap, ArrowRight, Code, MessageSquare, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export default function Hero() {
-  const conversionCards = [
-    {
-      icon: <Layers className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
-      title: "Functional Web & Mobile Apps",
-      desc: "We don't just design landing pages. We build powerful, custom-engineered digital software, internal dashboards, and utility portals tailored to your operations."
-    },
-    {
-      icon: <Smartphone className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
-      title: "Local Commerce Integrations",
-      desc: "Seamless integration with MTN MoMo, Airtel Money API, and automated WhatsApp order routing designed to convert Ugandan traffic into passive revenue."
-    },
-    {
-      icon: <Zap className="h-5 w-5" style={{ color: 'var(--accent)' }} />,
-      title: "Performance-Obsessed Speed",
-      desc: "Zero bloated software or heavy templates. Our codebases load instantly across Kampala and upcountry—even on slow mobile connections—to prevent customer drop-off."
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15, delayChildren: 0.1 }
     }
-  ]
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+  };
+
+  const featureCards = [
+    {
+      icon: <Code className="w-5 h-5 text-blue-400" />,
+      title: "Functional Web & Mobile Apps",
+      desc: "Custom-engineered digital software, internal dashboards, and utility portals built for scale."
+    },
+    {
+      icon: <Smartphone className="w-5 h-5 text-emerald-400" />,
+      title: "Local Commerce Integrations",
+      desc: "Native MTN MoMo, Airtel Money API, and automated WhatsApp ordering for high conversion."
+    },
+    {
+      icon: <Zap className="w-5 h-5 text-amber-400" />,
+      title: "Performance-Obsessed Speed",
+      desc: "Lightweight codebases loading in under 2 seconds across Kampala and upcountry networks."
+    }
+  ];
 
   return (
-    <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
-      
-      {/* 1. Base Dark Background Layer */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{
-          backgroundColor: 'var(--bg)', // Uses your dark theme background
-          opacity: 0.98
-        }}
-      />
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 bg-[#0b0f19] text-white overflow-hidden">
+      {/* Subtle Glowing Background Mesh (No scattered dots) */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/15 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-600/15 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* 2. Cyber Infrastructure Animation Container (Layered above base bg) */}
-      <motion.div 
-        className="absolute inset-0 z-0 pointer-events-none"
-        variants={cameraDrift}
-        animate="animate"
-      >
-        {/* Fine Animated Grid Backdrop */}
-        <div 
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: 'radial-gradient(var(--surface-border) 1px, transparent 1px)',
-            backgroundSize: '24px 24px',
-            maskImage: 'radial-gradient(circle at center, black 60%, transparent 100%)' // Prevents grid from going to the edges
-          }}
-        />
-
-        {/* --- Animated Data Infrastructure Nodes & Flows --- */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-60"
-          viewBox="0 0 1440 800"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/* Defined glow effect filter */}
-          <defs>
-            <filter id="glow">
-              <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Connected Server Nodes */}
-          <g filter="url(#glow)">
-            {/* Node 1 */}
-            <circle cx="200" cy="150" r="4" style={{ fill: 'var(--accent)' }} />
-            <circle cx="200" cy="150" r="10" stroke="var(--accent)" strokeWidth="0.5" fill="none" />
-            {/* Node 2 (Center-Left) */}
-            <circle cx="500" cy="500" r="3" style={{ fill: 'var(--accent)' }} />
-            <circle cx="500" cy="500" r="8" stroke="var(--accent)" strokeWidth="0.5" fill="none" />
-            {/* Node 3 (Top-Right) */}
-            <circle cx="1200" cy="250" r="4" style={{ fill: 'var(--accent)' }} />
-            <circle cx="1200" cy="250" r="10" stroke="var(--accent)" strokeWidth="0.5" fill="none" />
-          </g>
-
-          {/* Connected Network Path & Pulsing Data Stream */}
-          <motion.path
-            d="M200,150 C250,200 450,450 500,500" // Path 1: Top-Left to Center
-            stroke="var(--accent)"
-            strokeWidth="0.5"
-            fill="none"
-            filter="url(#glow)"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 0], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 12, ease: 'easeInOut', repeat: Infinity }}
-          />
-          <motion.path
-            d="M500,500 C800,550 1150,300 1200,250" // Path 2: Center to Top-Right
-            stroke="var(--accent)"
-            strokeWidth="0.5"
-            fill="none"
-            filter="url(#glow)"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 0], opacity: [0.3, 0.7, 0.3] }}
-            transition={{ duration: 15, ease: 'easeInOut', repeat: Infinity, delay: 6 }}
-          />
-        </svg>
-
-        {/* --- Floating Volumetric Light Particles --- */}
-        {[...Array(20)].map((_, idx) => (
-          <motion.div
-            key={idx}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              width: `${Math.random() * 4 + 1}px`,
-              height: `${Math.random() * 4 + 1}px`,
-              backgroundColor: 'var(--accent)',
-              boxShadow: '0 0 10px 1px var(--accent)'
-            }}
-            initial={{ opacity: 0, x: Math.random() * 1440, y: Math.random() * 800 }}
-            animate={{ 
-              opacity: [0, 0.3, 0],
-              x: [null, Math.random() * 1440],
-              y: [null, Math.random() * 800],
-            }}
-            transition={{ 
-              duration: Math.random() * 20 + 20, 
-              ease: 'easeInOut',
-              repeat: Infinity,
-              delay: Math.random() * 10
-            }}
-          />
-        ))}
-
-        {/* --- Soft Moving Volumetric Light Beam Overlay --- */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          className="absolute inset-0 pointer-events-none z-0"
-          style={{
-            background: 'radial-gradient(circle at 70% 30%, transparent 20%, var(--bg) 95%)',
-          }}
-          animate={{
-            background: [
-              'radial-gradient(circle at 70% 30%, transparent 20%, var(--bg) 95%)',
-              'radial-gradient(circle at 30% 70%, transparent 20%, var(--bg) 95%)',
-              'radial-gradient(circle at 70% 30%, transparent 20%, var(--bg) 95%)',
-            ]
-          }}
-          transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
-        />
-      </motion.div>
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
+        >
+          {/* LEFT COLUMN: Main Pitch */}
+          <div className="lg:col-span-7 space-y-6 text-left">
+            {/* Location & Tagline Pill */}
+            <motion.div variants={itemVariants} className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              <span>Bespoke Web Design & Custom Apps • Kampala, Uganda</span>
+            </motion.div>
 
-      {/* --- Main Hero Content (Layered above animation with z-10) --- */}
-      <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
-        {/* Left Side: Content */}
-        <div>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="eyebrow font-body mb-6 inline-flex items-center gap-2 text-xs"
-            style={{ color: 'var(--accent)' }}
-          >
-            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
-            Bespoke Web Design &amp; Custom App Development · Uganda
-          </motion.p>
+            {/* Headline */}
+            <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]">
+              Uganda's Premier <br />
+              <span className="bg-gradient-to-r from-blue-400 via-indigo-300 to-sky-400 bg-clip-text text-transparent">
+                Digital Systems Builder
+              </span>
+            </motion.h1>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-4xl leading-[1.08] sm:text-5xl md:text-6xl"
-            style={{ color: 'var(--text-primary)' }}
-          >
-            Uganda's Premier Website Builders &amp; Custom App Developers.
-          </motion.h1>
+            {/* Paragraph */}
+            <motion.p variants={itemVariants} className="text-gray-400 text-base sm:text-lg max-w-2xl leading-relaxed">
+              We transform business operations across East Africa with high-performance custom websites, mobile applications, and automated workflow infrastructure.
+            </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-body mt-6 max-w-xl text-base leading-relaxed sm:text-lg"
-            style={{ color: 'var(--text-secondary)' }}
-          >
-            We transform business operations across East Africa with high-performance custom websites and functional software applications. Driven by automated workflow infrastructure.
-          </motion.p>
+            {/* Call to Actions */}
+            <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-2">
+              <a
+                href="https://wa.me/256764110535"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center space-x-2 bg-blue-600 hover:bg-blue-500 text-white font-bold px-7 py-3.5 rounded-xl shadow-lg shadow-blue-600/30 hover:shadow-blue-500/50 transition-all text-sm sm:text-base"
+              >
+                <MessageSquare className="w-5 h-5" />
+                <span>Build an App / Website</span>
+              </a>
 
-          <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-9 flex flex-wrap items-center gap-4"
-          >
-            <a
-              href={`https://wa.me/${WHATSAPP_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-hover
-              className="theme-transition inline-flex items-center gap-2 px-6 py-3.5 font-body text-sm font-medium"
-              style={{
-                borderRadius: 'var(--control-radius)',
-                backgroundColor: 'var(--accent)',
-                color: 'var(--accent-text)',
-              }}
-            >
-              <MessageCircle size={16} />
-              Build an App / Website
-            </a>
-            <a
-              href="#work"
-              data-cursor-hover
-              className="theme-transition inline-flex items-center gap-2 border px-6 py-3.5 font-body text-sm"
-              style={{
-                borderRadius: 'var(--control-radius)',
-                borderWidth: 'var(--border-width)',
-                borderColor: 'var(--surface-border)',
-                color: 'var(--text-primary)',
-              }}
-            >
-              See the work
-              <ArrowDownRight size={16} />
-            </a>
-          </motion.div>
-        </div>
+              <a
+                href="#solutions"
+                className="inline-flex items-center justify-center space-x-2 bg-gray-900 hover:bg-gray-800 text-gray-200 border border-gray-800 font-semibold px-6 py-3.5 rounded-xl transition-all text-sm sm:text-base"
+              >
+                <span>See Our Solutions</span>
+                <ArrowRight className="w-4 h-4 text-gray-400" />
+              </a>
+            </motion.div>
 
-        {/* Right Side: Value Cards */}
-        <div className="flex flex-col gap-4">
-          {conversionCards.map((card, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.25 + idx * 0.1 }}
-              className="theme-transition flex gap-4 p-5 border"
-              style={{
-                borderRadius: 'var(--control-radius)',
-                borderWidth: 'var(--border-width)',
-                borderColor: 'var(--surface-border)',
-                backgroundColor: 'color-mix(in srgb, var(--bg) 95%, white 5%)',
-                boxShadow: 'var(--brutalist-shadow, none)'
-              }}
-            >
-              <div className="flex-shrink-0 mt-0.5">{card.icon}</div>
-              <div>
-                <h3 
-                  className="font-display text-base font-semibold mb-1" 
-                  style={{ color: 'var(--text-primary)' }}
-                >
-                  {card.title}
-                </h3>
-                <p 
-                  className="font-body text-xs leading-relaxed" 
-                  style={{ color: 'var(--text-secondary)' }}
-                >
-                  {card.desc}
-                </p>
+            {/* Quick Trust Badges */}
+            <motion.div variants={itemVariants} className="pt-6 border-t border-gray-800/80 grid grid-cols-3 gap-4 text-xs text-gray-400">
+              <div className="flex items-center space-x-2">
+                <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                <span>MTN & Airtel MoMo Ready</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <span>Bank-Grade Security</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Zap className="w-4 h-4 text-amber-400 flex-shrink-0" />
+                <span>Sub-2s Load Times</span>
               </div>
             </motion.div>
-          ))}
-        </div>
+          </div>
+
+          {/* RIGHT COLUMN: Glassmorphic Feature Cards */}
+          <div className="lg:col-span-5 space-y-4">
+            {featureCards.map((card, idx) => (
+              <motion.div
+                key={idx}
+                variants={itemVariants}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="p-6 rounded-2xl bg-gray-900/70 border border-gray-800 hover:border-blue-500/40 backdrop-blur-md shadow-xl transition-all"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="p-3 rounded-xl bg-gray-800/80 border border-gray-700/50 flex-shrink-0">
+                    {card.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-white mb-1">{card.title}</h3>
+                    <p className="text-gray-400 text-xs leading-relaxed">{card.desc}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
-  )
+  );
 }
