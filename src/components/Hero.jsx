@@ -25,10 +25,29 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
+      {/* 1. Background Video Layer */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none opacity-25"
+      >
+        <source src="/hero-bg.mp4" type="video/mp4" />
+      </video>
+
+      {/* 2. Theme Overlay & Backdrops */}
+      <div 
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundColor: 'color-mix(in srgb, var(--bg) 85%, transparent 15%)'
+        }}
+      />
       <ThemedBackdrop variant="grid" />
       <ThemedBackdrop variant="particles" className="opacity-40" />
 
-      <div className="relative mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
+      {/* 3. Main Hero Content (Kept above video with z-10) */}
+      <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
         {/* Left Side: Editorial & SEO-Optimized Content */}
         <div>
           <motion.p
