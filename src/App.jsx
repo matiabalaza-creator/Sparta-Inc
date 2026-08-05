@@ -7,6 +7,9 @@ import {
   PackageCheck, ArrowUpRight, Sparkles, Check, Globe, MessageSquare
 } from 'lucide-react';
 
+// Import your custom Framer Motion Animated Hero Component
+import Hero from './components/Hero';
+
 // --- SEO SCHEMA COMPONENT ---
 const SEOSchema = () => {
   const schemaData = {
@@ -37,7 +40,7 @@ const SEOSchema = () => {
   );
 };
 
-// --- PROJECT SCOPE BUILDER COMPONENT (REPLACES SCARY PRICE CALCULATOR) ---
+// --- PROJECT SCOPE BUILDER COMPONENT ---
 const ProjectScopeBuilder = () => {
   const [projectType, setProjectType] = useState('corporate');
   const [timeline, setTimeline] = useState('standard');
@@ -142,7 +145,7 @@ const ProjectScopeBuilder = () => {
                 className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
               />
               <div>
-                <p className="text-sm font-bold text-gray-900">MTN & Airtel MoMo Gateway + WhatsApp Routing</p>
+                <p className="text-sm font-bold text-gray-900">MTN &amp; Airtel MoMo Gateway + WhatsApp Routing</p>
                 <p className="text-xs text-gray-500">Allow customers to pay via local mobile money or send orders to WhatsApp</p>
               </div>
             </div>
@@ -157,7 +160,7 @@ const ProjectScopeBuilder = () => {
                 className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
               />
               <div>
-                <p className="text-sm font-bold text-gray-900">Kampala Local SEO & Google Search Setup</p>
+                <p className="text-sm font-bold text-gray-900">Kampala Local SEO &amp; Google Search Setup</p>
                 <p className="text-xs text-gray-500">Optimization to ensure your business ranks high on Google local searches</p>
               </div>
             </div>
@@ -335,7 +338,7 @@ const AwardsBanner = () => {
   );
 };
 
-// --- INTERACTIVE & ANIMATED INDUSTRY SHOWCASE SECTION ---
+// --- INTERACTIVE INDUSTRY SHOWCASE SECTION ---
 const InteractiveIndustryShowcase = () => {
   const [activeTab, setActiveTab] = useState(0);
 
@@ -410,13 +413,10 @@ const InteractiveIndustryShowcase = () => {
 
   return (
     <section id="solutions" className="py-24 bg-[#0a0f1d] text-white relative overflow-hidden">
-      {/* Background glow effects */}
       <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-blue-400 font-semibold text-sm tracking-widest uppercase">Tailored Architectures</span>
           <h2 className="text-3xl md:text-5xl font-black mt-2 mb-4 tracking-tight">How We Build For Your Industry</h2>
@@ -425,7 +425,6 @@ const InteractiveIndustryShowcase = () => {
           </p>
         </div>
 
-        {/* Tab Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {niches.map((niche, idx) => {
             const isActive = activeTab === idx;
@@ -453,7 +452,6 @@ const InteractiveIndustryShowcase = () => {
           })}
         </div>
 
-        {/* Animated Showcase Card */}
         <div className="bg-gray-900/80 border border-gray-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
@@ -464,7 +462,6 @@ const InteractiveIndustryShowcase = () => {
               transition={{ duration: 0.35, ease: "easeInOut" }}
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
             >
-              {/* Left Column: Details & Key Features */}
               <div className="lg:col-span-7 space-y-6">
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-400 border border-blue-500/20 mb-3">
@@ -478,7 +475,6 @@ const InteractiveIndustryShowcase = () => {
                   </p>
                 </div>
 
-                {/* Key Metrics / Highlights */}
                 <div className="flex flex-wrap gap-2 py-2">
                   {current.metrics.map((m, mIdx) => (
                     <span key={mIdx} className="bg-gray-800/90 text-gray-200 border border-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium">
@@ -487,7 +483,6 @@ const InteractiveIndustryShowcase = () => {
                   ))}
                 </div>
 
-                {/* Feature checklist */}
                 <div className="space-y-3 pt-2">
                   <p className="text-xs font-bold uppercase tracking-wider text-gray-400">Included Feature Modules:</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -513,7 +508,6 @@ const InteractiveIndustryShowcase = () => {
                 </div>
               </div>
 
-              {/* Right Column: Live Feature Visual / Interactive Prototype Frame */}
               <div className="lg:col-span-5">
                 <div className="bg-gray-950 rounded-2xl border border-gray-800 p-6 shadow-inner relative overflow-hidden">
                   <div className="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
@@ -568,16 +562,6 @@ const InteractiveIndustryShowcase = () => {
 // --- MAIN APP COMPONENT ---
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-  };
 
   const whyChooseUsData = [
     {
@@ -660,259 +644,52 @@ export default function App() {
         )}
       </nav>
 
-      {/* HERO SECTION */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-28 px-4 overflow-hidden">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-          <motion.div 
-            initial="hidden" animate="visible" variants={fadeUp}
-            className="flex-1 text-center lg:text-left z-10"
-          >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-semibold text-sm mb-6 border border-blue-100">
-              <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
-              Trusted Digital Infrastructure
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-gray-900 leading-[1.1] mb-6">
-              Engineering High-Performance <br className="hidden lg:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                Websites & Applications
-              </span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Over 7 years of building reliable digital infrastructure. We turn slow, outdated sites into fast, client-converting machines equipped with automated local payment integrations.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <a href="#proposal" className="bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-semibold transition-all shadow-xl hover:shadow-2xl flex items-center justify-center">
-                Build Project Scope
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-              <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-white border-2 border-gray-200 hover:border-gray-300 text-gray-800 px-8 py-4 rounded-xl font-semibold transition-all flex items-center justify-center">
-                Talk to a Developer
-              </a>
-            </div>
-          </motion.div>
+      {/* --- HERO SECTION WITH CYBER ANIMATION --- */}
+      <Hero />
 
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex-1 w-full max-w-lg relative"
-          >
-            <motion.div 
-              animate={{ y: [-10, 10, -10] }} 
-              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-              className="relative bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full blur-3xl -mr-10 -mt-10"></div>
-              <div className="space-y-6 relative z-10">
-                <div className="flex items-start p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <div className="bg-green-100 p-2 rounded-lg mr-4">
-                    <Search className="w-6 h-6 text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">Top 5 Local SEO Ranking</h4>
-                    <p className="text-sm text-gray-500 mt-1">Dominate Kampala search results for your services.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start p-4 bg-gray-50 rounded-xl border border-gray-100">
-                  <div className="bg-yellow-100 p-2 rounded-lg mr-4">
-                    <Smartphone className="w-6 h-6 text-yellow-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">MTN & Airtel MoMo Native</h4>
-                    <p className="text-sm text-gray-500 mt-1">Instant mobile money checkouts for e-commerce.</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* TRUST & BRANDS MARQUEE BANNER */}
+      {/* --- TRUST MARQUEE BANNER --- */}
       <TrustMarqueeBanner />
 
-      {/* SERVICES SECTION */}
-      <section id="services" className="py-20 bg-white">
+      {/* --- WHY US SECTION --- */}
+      <section id="why-us" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Solutions That Drive Revenue</h2>
-            <p className="text-gray-600 text-lg">We move away from technical jargon to focus on what matters: efficiency, sales, and growth for your Ugandan business.</p>
+            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Why Top East African Enterprises Choose Sparta Inc</h2>
+            <p className="text-gray-500 text-base md:text-lg">Engineering standards tailored specifically for performance and business ROI.</p>
           </div>
 
-          <motion.div 
-            variants={staggerContainer} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-          >
-            <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
-              <Layout className="w-12 h-12 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Corporate & Institutional Sites</h3>
-              <p className="text-gray-600 mb-4">Fast-loading, professional web portals designed for schools, SMEs, and large agencies to establish ultimate trust.</p>
-              <ul className="space-y-2">
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Admissions & Enrollment Portals</li>
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Document Management</li>
-              </ul>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
-              <Code className="w-12 h-12 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Custom Web Applications</h3>
-              <p className="text-gray-600 mb-4">Tailor-made dashboards and internal software to automate your daily business operations and eliminate paperwork.</p>
-              <ul className="space-y-2">
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Inventory & Employee Dashboards</li>
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Secure Cloud Infrastructure</li>
-              </ul>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
-              <ShoppingCart className="w-12 h-12 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Deep Local E-Commerce</h3>
-              <p className="text-gray-600 mb-4">Stop losing sales to friction. We build online stores that integrate perfectly with how Ugandans buy online.</p>
-              <ul className="space-y-2">
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> MTN / Airtel MoMo API Integration</li>
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Automated WhatsApp Order Routing</li>
-              </ul>
-            </motion.div>
-
-            <motion.div variants={fadeUp} className="group p-8 rounded-2xl bg-gray-50 hover:bg-white border border-transparent hover:border-gray-100 hover:shadow-xl transition-all duration-300">
-              <Search className="w-12 h-12 text-blue-600 mb-6" />
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Local SEO & Brand Storytelling</h3>
-              <p className="text-gray-600 mb-4">If they can't find you on Google, you don't exist. We optimize your code and content to capture active local searches.</p>
-              <ul className="space-y-2">
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Technical Speed Optimization</li>
-                <li className="flex items-center text-sm text-gray-600"><CheckCircle className="w-4 h-4 text-green-500 mr-2"/> Local Schema Architecture</li>
-              </ul>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* AWARDS BANNER */}
-      <AwardsBanner />
-
-      {/* WHY CHOOSE US SECTION */}
-      <section id="why-us" className="py-20 bg-gray-50 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">The Sparta Advantage</span>
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mt-2 mb-4">Why Businesses Partner With Us</h2>
-            <p className="text-gray-600 text-lg">We don't just build websites; we engineer scalable digital assets tailored to the Ugandan operating environment.</p>
-          </div>
-
-          <motion.div 
-            variants={staggerContainer} 
-            initial="hidden" 
-            whileInView="visible" 
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {whyChooseUsData.map((item, index) => (
-              <motion.div 
-                key={index}
-                variants={fadeUp}
-                className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md border border-gray-100 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center mb-6">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-sm">{item.description}</p>
-                </div>
-              </motion.div>
+              <div key={index} className="p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:border-blue-200 transition-all hover:shadow-lg">
+                <div className="mb-4">{item.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* ANIMATED & INTERACTIVE INDUSTRY SHOWCASE SECTION */}
+      {/* --- INDUSTRY SHOWCASE --- */}
       <InteractiveIndustryShowcase />
 
-      {/* PROPOSAL & SCOPE BUILDER (REPLACED PRICING CALCULATOR) */}
-      <section id="proposal" className="py-24 bg-gray-50">
+      {/* --- AWARDS BANNER --- */}
+      <AwardsBanner />
+
+      {/* --- PROPOSAL BUILDER SECTION --- */}
+      <section id="proposal" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-blue-600 font-semibold text-sm tracking-widest uppercase">Tailored Execution</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mt-1 mb-4">Request a Project Proposal</h2>
-            <p className="text-gray-600 text-lg">
-              Every business has unique requirements. Select your scope below for a free, customized project roadmap and quote.
-            </p>
-          </div>
-          
           <ProjectScopeBuilder />
         </div>
       </section>
 
-      {/* FOOTER & CONTACT */}
-      <footer className="bg-white border-t border-gray-200 pt-16 pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-            <div className="lg:col-span-2">
-              <span className="text-2xl font-black tracking-tight text-gray-900 mb-6 block">
-                SPARTA<span className="text-blue-600">INC.</span>
-              </span>
-              <p className="text-gray-600 max-w-md mb-6">
-                Sparta Inc Developers builds highly-functional, performance-obsessed digital infrastructure tailored to Ugandan business operations.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-bold text-gray-900 mb-6">Contact Us</h4>
-              <ul className="space-y-4">
-                <li className="flex items-center text-gray-600">
-                  <Phone className="w-5 h-5 mr-3 text-blue-600" />
-                  <a href="tel:+256764110535" className="hover:text-blue-600">+256 764 110 535</a>
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <Phone className="w-5 h-5 mr-3 text-blue-600" />
-                  <a href="tel:+256756814866" className="hover:text-blue-600">+256 756 814 866</a>
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <Mail className="w-5 h-5 mr-3 text-blue-600" />
-                  <a href="mailto:info@spartaincdev.com" className="hover:text-blue-600">info@spartaincdev.com</a>
-                </li>
-                <li className="flex items-center text-gray-600">
-                  <MapPin className="w-5 h-5 mr-3 text-blue-600" />
-                  Kampala, Uganda
-                </li>
-              </ul>
-            </div>
-
-            <div>
-              <h4 className="font-bold text-gray-900 mb-6">Quick Links</h4>
-              <ul className="space-y-3 text-gray-600">
-                <li><a href="#services" className="hover:text-blue-600">Web Design</a></li>
-                <li><a href="#solutions" className="hover:text-blue-600">Industry Solutions</a></li>
-                <li><a href="#proposal" className="hover:text-blue-600">Request Proposal</a></li>
-                <li><a href="#why-us" className="hover:text-blue-600">Why Us</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-100 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-            <p>&copy; {new Date().getFullYear()} Sparta Inc Developers. All rights reserved.</p>
-            <p className="mt-2 md:mt-0">Engineered in Kampala, Uganda</p>
-          </div>
+      {/* --- FOOTER --- */}
+      <footer className="bg-gray-950 text-gray-400 py-12 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className="text-sm">© {new Date().getFullYear()} Sparta Inc Developers. All rights reserved. Kampala, Uganda.</p>
         </div>
       </footer>
 
-      {/* FLOATING WHATSAPP BUTTON */}
-      <a 
-        href="https://wa.me/256764110535" 
-        target="_blank" 
-        rel="noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 hover:shadow-green-500/30 transition-all duration-300"
-        aria-label="Chat on WhatsApp"
-      >
-        <svg 
-          xmlns="http://www.w3.org/2000/svg" 
-          width="32" height="32" 
-          fill="currentColor" 
-          viewBox="0 0 16 16"
-        >
-          <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.396.366 2.76 1.056 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-        </svg>
-      </a>
     </div>
   );
 }
