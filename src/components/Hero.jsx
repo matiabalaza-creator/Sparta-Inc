@@ -25,30 +25,36 @@ export default function Hero() {
 
   return (
     <section id="top" className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
-      {/* 1. Background Video Layer */}
+      {/* 1. Base Grid Backdrop */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <ThemedBackdrop variant="grid" />
+      </div>
+
+      {/* 2. Video Layer (Placed at z-0 with higher opacity) */}
       <video
         autoPlay
         loop
         muted
         playsInline
-        className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none opacity-25"
+        className="absolute inset-0 h-full w-full object-cover z-0 pointer-events-none opacity-60"
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
       </video>
 
-      {/* 2. Theme Overlay & Backdrops */}
+      {/* 3. Gradient Vignette Overlay (Blends edges into theme background) */}
       <div 
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          backgroundColor: 'color-mix(in srgb, var(--bg) 85%, transparent 15%)'
+          background: 'radial-gradient(circle at center, transparent 20%, var(--bg) 95%)'
         }}
       />
-      <ThemedBackdrop variant="grid" />
-      <ThemedBackdrop variant="particles" className="opacity-40" />
 
-      {/* 3. Main Hero Content (Kept above video with z-10) */}
+      {/* 4. Particle Layer */}
+      <ThemedBackdrop variant="particles" className="opacity-30 z-0" />
+
+      {/* 5. Foreground Content Container (Forced above all background elements with z-10) */}
       <div className="relative z-10 mx-auto grid max-w-7xl gap-14 px-5 md:grid-cols-[1.1fr_0.9fr] md:items-center md:px-10">
-        {/* Left Side: Editorial & SEO-Optimized Content */}
+        {/* Left Side: Content */}
         <div>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -119,7 +125,7 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Right Side: High-Converting Local Value Cards */}
+        {/* Right Side: Value Cards */}
         <div className="flex flex-col gap-4">
           {conversionCards.map((card, idx) => (
             <motion.div
@@ -132,7 +138,7 @@ export default function Hero() {
                 borderRadius: 'var(--control-radius)',
                 borderWidth: 'var(--border-width)',
                 borderColor: 'var(--surface-border)',
-                backgroundColor: 'color-mix(in srgb, var(--bg) 95%, white 5%)',
+                backgroundColor: 'color-mix(in srgb, var(--bg) 90%, white 10%)',
                 boxShadow: 'var(--brutalist-shadow, none)'
               }}
             >
