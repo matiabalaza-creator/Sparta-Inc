@@ -6,7 +6,7 @@ export default function Footer() {
           Sparta <span style={{ color: 'var(--accent)' }}>Inc</span>
         </p>
         <p className="font-body text-xs" style={{ color: 'var(--text-muted)' }}>
-          © {new Date().getFullYear()} Sparta Inc Developers · Kampala, Uganda
+          © {new Date().getFullYear()} Sparta Inc Dev · Kampala, Uganda
         </p>
       </div>
     </footer>
