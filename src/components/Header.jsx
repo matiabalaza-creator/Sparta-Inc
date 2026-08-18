@@ -38,7 +38,7 @@ export default function Header() {
         >
           <img 
             src="/logo.png" 
-            alt="Sparta Inc Logo" 
+            alt="Sparta Inc Dev Logo" 
             className="h-8 w-auto object-contain transition-transform duration-300 hover:scale-105"
           />
           <span className="font-semibold">
