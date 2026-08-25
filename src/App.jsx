@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Menu, X, ArrowRight, Code, Layout, ShoppingCart, 
-  Search, CheckCircle, Mail, Phone, MapPin, Smartphone,
+  Menu, X, ArrowRight, Code, ShoppingCart, 
+  CheckCircle, Mail, MapPin, Smartphone,
   Zap, ShieldCheck, HeartHandshake, TrendingUp, GraduationCap, Building2,
   PackageCheck, ArrowUpRight, Sparkles, Check, Globe, MessageSquare,
-  Facebook, Instagram, MessageCircle, ExternalLink
+  MessageCircle
 } from 'lucide-react';
 
-import Hero from './components/Hero';
+import Hero from './components/Hero.jsx';
 
 const WHATSAPP_NUMBER = '256762110535';
 const OFFICIAL_EMAIL = 'info@spartaincdev.com';
 
+// Built-in SVG Icons (Zero package dependencies)
+const FacebookIcon = () => (
+  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+);
+
+const InstagramIcon = () => (
+  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+);
+
 // --- FLOATING WHATSAPP BUTTON ---
 const FloatingWhatsApp = () => {
   return (
-    <motion.a
+    <a
       href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Sparta Inc! 👋 I'd like to discuss a new web/app project.")}`}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ scale: 0, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.4, delay: 0.8 }}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.95 }}
       aria-label="Chat with Sparta Inc on WhatsApp"
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center p-3.5 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full shadow-2xl shadow-emerald-500/40 border border-emerald-300/30 transition-all cursor-pointer group"
     >
@@ -36,7 +44,7 @@ const FloatingWhatsApp = () => {
       <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-semibold text-xs px-0 group-hover:px-2">
         Chat with a Developer
       </span>
-    </motion.a>
+    </a>
   );
 };
 
@@ -56,7 +64,7 @@ const SEOSchema = () => {
       "addressLocality": "Kampala",
       "addressCountry": "UG"
     },
-    "description": "Sparta Inc Developers engineers high-performance websites and custom applications in Kampala, Uganda. Specializing in E-Commerce, MTN/Airtel MoMo integrations, and Local SEO.",
+    "description": "Sparta Inc Developers engineers high-performance websites and custom applications in Kampala, Uganda.",
     "sameAs": [
       `https://wa.me/${WHATSAPP_NUMBER}`,
       "https://facebook.com/spartaincdev",
@@ -113,7 +121,6 @@ const ProjectScopeBuilder = () => {
       </div>
 
       <div className="space-y-6">
-        {/* Project Type */}
         <div>
           <label className="block text-sm font-semibold text-slate-300 mb-2">What are you looking to build?</label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -139,7 +146,6 @@ const ProjectScopeBuilder = () => {
           </div>
         </div>
 
-        {/* Timeline Preference */}
         <div>
           <label className="block text-sm font-semibold text-slate-300 mb-2">Target Completion Timeline</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -164,7 +170,6 @@ const ProjectScopeBuilder = () => {
           </div>
         </div>
 
-        {/* Add-ons */}
         <div className="space-y-3 pt-2">
           <label className="block text-sm font-semibold text-slate-300">Recommended Modules</label>
           
@@ -199,7 +204,6 @@ const ProjectScopeBuilder = () => {
           </label>
         </div>
 
-        {/* Summary Card */}
         <div className="mt-8 p-6 bg-gradient-to-br from-slate-950 to-blue-950/60 text-white rounded-2xl border border-blue-500/20 shadow-xl">
           <p className="text-xs uppercase tracking-wider text-blue-400 font-bold mb-2">Included with every build:</p>
           <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 mb-6">
@@ -219,22 +223,19 @@ const ProjectScopeBuilder = () => {
             <span>Get Tailored Proposal on WhatsApp</span>
             <ArrowRight className="w-5 h-5" />
           </a>
-          <p className="text-center text-[11px] text-slate-400 mt-2.5">
-            Direct developer contact • No obligation • Instant response
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-// --- TECHNICAL STANDARDS & TRUST METRICS ---
+// --- TECHNICAL STANDARDS ---
 const EngineeringStandards = () => {
   const standards = [
     { title: "99.9% Uptime", desc: "Global edge CDN & DNS infrastructure", icon: <ShieldCheck className="w-5 h-5 text-blue-400" /> },
     { title: "Sub-2s Load Speeds", desc: "Optimized for mobile connections in East Africa", icon: <Zap className="w-5 h-5 text-amber-400" /> },
     { title: "MTN & Airtel Ready", desc: "Certified local Mobile Money API routing", icon: <Smartphone className="w-5 h-5 text-emerald-400" /> },
-    { title: "Modern Codebases", desc: "Clean React, Next.js & Tailwind architecture", icon: <Code className="w-5 h-5 text-sky-400" /> }
+    { title: "Modern Codebases", desc: "Clean React & Tailwind architecture", icon: <Code className="w-5 h-5 text-sky-400" /> }
   ];
 
   return (
@@ -268,11 +269,11 @@ const InteractiveIndustryShowcase = () => {
       icon: <GraduationCap className="w-5 h-5" />,
       title: "Schools & Academies",
       tagline: "Automated Admissions & Parent Portals",
-      description: "We eliminate administrative bottlenecks for educational institutions with self-service admission forms, printable prospectus views, and direct WhatsApp enrollment inquiries.",
+      description: "We eliminate administrative bottlenecks for educational institutions with self-service admission forms and direct WhatsApp enrollment inquiries.",
       metrics: ["+300% Online Inquiries", "100% Mobile Friendly", "Instant MoMo Fee Collection"],
       features: [
         "Online Student Admission Engine",
-        "Termly Fee Structure & Downloadable Prospectus",
+        "Termly Fee Structure & Prospectus",
         "Direct Parent WhatsApp & Email Routing",
         "Staff Directory & Campus News Bulletin"
       ],
@@ -284,13 +285,13 @@ const InteractiveIndustryShowcase = () => {
       icon: <Building2 className="w-5 h-5" />,
       title: "Real Estate & Housing",
       tagline: "High-Converting Listing Engines",
-      description: "Empower agents and property developers to showcase listings with interactive property filters, high-resolution galleries, location mapping, and automated site-visit bookings.",
+      description: "Empower agents and property developers to showcase listings with interactive property filters, high-resolution galleries, and automated visit bookings.",
       metrics: ["Filter by Rent / Sale", "Instant Agent Call Button", "Virtual Tour Ready"],
       features: [
-        "Dynamic Property Search (Price, Beds, Location)",
+        "Dynamic Property Search",
         "WhatsApp Inspection Request System",
         "Interactive Google Map Location Pins",
-        "Mortgage / Monthly Payment Estimator Widget"
+        "Payment Estimator Widget"
       ],
       previewHeadline: "Property Listing Engine",
       previewSub: "Real Estate Portal Blueprint"
@@ -300,13 +301,13 @@ const InteractiveIndustryShowcase = () => {
       icon: <ShoppingCart className="w-5 h-5" />,
       title: "E-Commerce & Retail",
       tagline: "Frictionless Local Checkout Systems",
-      description: "Turn casual browsers into paying customers by accepting mobile payment methods natively alongside automated order alerts sent straight to your delivery team.",
+      description: "Turn casual browsers into paying customers by accepting mobile payment methods natively alongside automated order alerts.",
       metrics: ["MTN MoMo API Native", "Airtel Money Ready", "Automated WhatsApp Invoice"],
       features: [
-        "Direct MTN & Airtel Mobile Money Checkout",
+        "Direct MTN & Airtel MoMo Checkout",
         "Instant Order Routing to Delivery WhatsApp",
-        "Automated Low-Stock Inventory Alerts",
-        "Discount Coupon & Flash Sale Manager"
+        "Automated Low-Stock Alerts",
+        "Discount Coupon Manager"
       ],
       previewHeadline: "Retail Dashboard & Checkout",
       previewSub: "E-Commerce Blueprint"
@@ -317,12 +318,12 @@ const InteractiveIndustryShowcase = () => {
       title: "Logistics & Freight",
       tagline: "Real-Time Tracking & Quote Calculators",
       description: "Build client confidence for transport agencies, clearing firms, and fleet managers with instant shipping cost calculators and tracking updates.",
-      metrics: ["Automated Cost Quotes", "Fleet Capability Showcase", "24/7 Client Support Portal"],
+      metrics: ["Automated Cost Quotes", "Fleet Showcase", "24/7 Client Support Portal"],
       features: [
-        "Instant Cargo & Freight Quote Calculator",
-        "Shipment Status & Waybill Lookup UI",
-        "Service Route & Warehouse Directory",
-        "B2B Corporate Account Inquiry Forms"
+        "Instant Freight Quote Calculator",
+        "Shipment Status Lookup UI",
+        "Service Route Directory",
+        "B2B Account Inquiry Forms"
       ],
       previewHeadline: "Cargo & Transit Portal",
       previewSub: "Logistics Blueprint"
@@ -346,7 +347,6 @@ const InteractiveIndustryShowcase = () => {
           </p>
         </div>
 
-        {/* Tab Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {niches.map((niche, idx) => {
             const isActive = activeTab === idx;
@@ -374,7 +374,6 @@ const InteractiveIndustryShowcase = () => {
           })}
         </div>
 
-        {/* Showcase Card */}
         <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
@@ -526,14 +525,12 @@ export default function App() {
       <nav className="fixed w-full top-0 z-50 bg-[#020617]/85 backdrop-blur-xl border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Brand Logo */}
             <div className="flex-shrink-0 flex items-center cursor-pointer">
               <span className="text-2xl font-black tracking-tight text-white">
                 SPARTA<span className="text-blue-500">INC.</span>
               </span>
             </div>
             
-            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-7">
               <div className="flex items-center text-xs font-medium text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-full">
                 <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-400" />
@@ -544,7 +541,6 @@ export default function App() {
               <a href="#solutions" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Solutions</a>
               <a href="#proposal" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Scope Builder</a>
               
-              {/* Header Social Logo Links */}
               <div className="flex items-center space-x-2 pl-2 border-l border-slate-800">
                 <a 
                   href="https://facebook.com/spartaincdev" 
@@ -553,7 +549,7 @@ export default function App() {
                   aria-label="Sparta Inc Facebook"
                   className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all"
                 >
-                  <Facebook className="w-4 h-4" />
+                  <FacebookIcon />
                 </a>
                 <a 
                   href="https://instagram.com/spartaincdev" 
@@ -562,7 +558,7 @@ export default function App() {
                   aria-label="Sparta Inc Instagram"
                   className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/40 transition-all"
                 >
-                  <Instagram className="w-4 h-4" />
+                  <InstagramIcon />
                 </a>
                 <a 
                   href={`mailto:${OFFICIAL_EMAIL}`} 
@@ -583,7 +579,6 @@ export default function App() {
               </a>
             </div>
 
-            {/* Mobile Menu Trigger */}
             <div className="md:hidden flex items-center">
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-300 hover:text-white p-2">
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -602,10 +597,10 @@ export default function App() {
             
             <div className="flex items-center space-x-3 pt-3 border-t border-slate-800">
               <a href="https://facebook.com/spartaincdev" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                <Facebook className="w-4 h-4" />
+                <FacebookIcon />
               </a>
               <a href="https://instagram.com/spartaincdev" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
-                <Instagram className="w-4 h-4" />
+                <InstagramIcon />
               </a>
               <a href={`mailto:${OFFICIAL_EMAIL}`} className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
                 <Mail className="w-4 h-4" />
@@ -619,13 +614,13 @@ export default function App() {
         )}
       </nav>
 
-      {/* --- 1. HERO SECTION --- */}
+      {/* --- HERO SECTION --- */}
       <Hero />
 
-      {/* --- 2. TECHNICAL STANDARDS (REPLACES FAKE AWARDS) --- */}
+      {/* --- TECHNICAL STANDARDS --- */}
       <EngineeringStandards />
 
-      {/* --- 3. WHY CHOOSE US SECTION --- */}
+      {/* --- WHY CHOOSE US SECTION --- */}
       <section id="why-us" className="py-24 bg-[#020617] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -654,22 +649,21 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- 4. INDUSTRY SHOWCASE --- */}
+      {/* --- INDUSTRY SHOWCASE --- */}
       <InteractiveIndustryShowcase />
 
-      {/* --- 5. PROPOSAL BUILDER SECTION --- */}
+      {/* --- PROPOSAL BUILDER SECTION --- */}
       <section id="proposal" className="py-24 bg-[#020617] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProjectScopeBuilder />
         </div>
       </section>
 
-      {/* --- 6. ENTERPRISE FOOTER WITH SOCIALS & OFFICIAL EMAIL --- */}
+      {/* --- ENTERPRISE FOOTER --- */}
       <footer className="bg-[#01040d] text-slate-400 py-16 border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/60 text-left">
             
-            {/* Column 1: Brand & Bio */}
             <div className="md:col-span-5 space-y-4">
               <span className="text-2xl font-black tracking-tight text-white">
                 SPARTA<span className="text-blue-500">INC.</span>
@@ -685,7 +679,7 @@ export default function App() {
                   aria-label="Follow Sparta Inc on Facebook"
                   className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-blue-400 hover:border-blue-500/40 transition-all"
                 >
-                  <Facebook className="w-5 h-5" />
+                  <FacebookIcon />
                 </a>
                 <a 
                   href="https://instagram.com/spartaincdev" 
@@ -694,7 +688,7 @@ export default function App() {
                   aria-label="Follow Sparta Inc on Instagram"
                   className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/40 transition-all"
                 >
-                  <Instagram className="w-5 h-5" />
+                  <InstagramIcon />
                 </a>
                 <a 
                   href={`mailto:${OFFICIAL_EMAIL}`} 
@@ -706,7 +700,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Column 2: Direct Contact Details */}
             <div className="md:col-span-4 space-y-3">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-200">Official Inquiries</p>
               <div className="space-y-2.5 text-sm">
@@ -725,7 +718,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Column 3: Quick Links */}
             <div className="md:col-span-3 space-y-3">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-200">Capabilities</p>
               <ul className="space-y-2 text-sm text-slate-400">
