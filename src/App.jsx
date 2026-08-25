@@ -2,13 +2,43 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu, X, ArrowRight, Code, Layout, ShoppingCart, 
-  Search, CheckCircle, Calculator, Mail, Phone, MapPin, Smartphone,
+  Search, CheckCircle, Mail, Phone, MapPin, Smartphone,
   Zap, ShieldCheck, HeartHandshake, TrendingUp, GraduationCap, Building2,
-  PackageCheck, ArrowUpRight, Sparkles, Check, Globe, MessageSquare
+  PackageCheck, ArrowUpRight, Sparkles, Check, Globe, MessageSquare,
+  Facebook, Instagram, MessageCircle, ExternalLink
 } from 'lucide-react';
 
-// Import your custom Framer Motion Animated Hero Component
 import Hero from './components/Hero';
+
+const WHATSAPP_NUMBER = '256762110535';
+const OFFICIAL_EMAIL = 'info@spartaincdev.com';
+
+// --- FLOATING WHATSAPP BUTTON ---
+const FloatingWhatsApp = () => {
+  return (
+    <motion.a
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Sparta Inc! 👋 I'd like to discuss a new web/app project.")}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ duration: 0.4, delay: 0.8 }}
+      whileHover={{ scale: 1.08 }}
+      whileTap={{ scale: 0.95 }}
+      aria-label="Chat with Sparta Inc on WhatsApp"
+      className="fixed bottom-6 right-6 z-50 flex items-center justify-center p-3.5 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full shadow-2xl shadow-emerald-500/40 border border-emerald-300/30 transition-all cursor-pointer group"
+    >
+      <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
+        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+        <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-200"></span>
+      </span>
+      <MessageCircle className="w-7 h-7 fill-current" />
+      <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-semibold text-xs px-0 group-hover:px-2">
+        Chat with a Developer
+      </span>
+    </motion.a>
+  );
+};
 
 // --- SEO SCHEMA COMPONENT ---
 const SEOSchema = () => {
@@ -19,8 +49,8 @@ const SEOSchema = () => {
     "image": "https://spartaincdev.com/logo.png",
     "@id": "https://spartaincdev.com",
     "url": "https://spartaincdev.com",
-    "telephone": "+256764110535",
-    "email": "info@spartaincdev.com",
+    "telephone": `+${WHATSAPP_NUMBER}`,
+    "email": OFFICIAL_EMAIL,
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Kampala",
@@ -28,7 +58,9 @@ const SEOSchema = () => {
     },
     "description": "Sparta Inc Developers engineers high-performance websites and custom applications in Kampala, Uganda. Specializing in E-Commerce, MTN/Airtel MoMo integrations, and Local SEO.",
     "sameAs": [
-      "https://wa.me/256764110535"
+      `https://wa.me/${WHATSAPP_NUMBER}`,
+      "https://facebook.com/spartaincdev",
+      "https://instagram.com/spartaincdev"
     ]
   };
 
@@ -65,25 +97,25 @@ const ProjectScopeBuilder = () => {
       `• Local SEO Package: ${seoLabel}\n\n` +
       `Could we discuss a tailored quote for this scope?`;
 
-    return `https://wa.me/256764110535?text=${encodeURIComponent(message)}`;
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-gray-100 max-w-3xl mx-auto">
+    <div className="bg-slate-900/60 rounded-3xl shadow-2xl p-6 md:p-10 border border-slate-800 backdrop-blur-xl max-w-3xl mx-auto text-left">
       <div className="flex items-center space-x-3 mb-6">
-        <div className="p-2.5 bg-blue-50 rounded-xl text-blue-600">
+        <div className="p-2.5 bg-blue-500/10 border border-blue-500/20 rounded-xl text-blue-400">
           <Sparkles className="w-6 h-6" />
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-gray-900">Build Your Project Scope</h3>
-          <p className="text-sm text-gray-500">Select your requirements to receive a custom tailored proposal.</p>
+          <h3 className="text-2xl font-bold text-white">Build Your Project Scope</h3>
+          <p className="text-sm text-slate-400">Select your requirements to receive a direct tailored proposal.</p>
         </div>
       </div>
 
       <div className="space-y-6">
         {/* Project Type */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">What are you looking to build?</label>
+          <label className="block text-sm font-semibold text-slate-300 mb-2">What are you looking to build?</label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             {[
               { id: 'corporate', label: 'Corporate Website', icon: <Globe className="w-4 h-4" /> },
@@ -96,11 +128,11 @@ const ProjectScopeBuilder = () => {
                 onClick={() => setProjectType(item.id)}
                 className={`p-4 rounded-xl border text-left text-sm font-semibold transition-all flex flex-col justify-between h-24 ${
                   projectType === item.id
-                    ? 'border-blue-600 bg-blue-50/50 text-blue-700 ring-2 ring-blue-600/20'
-                    : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                    ? 'border-blue-500 bg-blue-600/15 text-white ring-1 ring-blue-500/30'
+                    : 'border-slate-800 bg-slate-950/40 hover:border-slate-700 text-slate-300'
                 }`}
               >
-                <span className={projectType === item.id ? 'text-blue-600' : 'text-gray-400'}>{item.icon}</span>
+                <span className={projectType === item.id ? 'text-blue-400' : 'text-slate-500'}>{item.icon}</span>
                 <span>{item.label}</span>
               </button>
             ))}
@@ -109,7 +141,7 @@ const ProjectScopeBuilder = () => {
 
         {/* Timeline Preference */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700 mb-2">Target Completion Timeline</label>
+          <label className="block text-sm font-semibold text-slate-300 mb-2">Target Completion Timeline</label>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {[
               { id: 'standard', label: 'Standard Delivery', sub: '2 - 3 Weeks (Recommended)' },
@@ -121,12 +153,12 @@ const ProjectScopeBuilder = () => {
                 onClick={() => setTimeline(item.id)}
                 className={`p-3.5 rounded-xl border text-left transition-all ${
                   timeline === item.id
-                    ? 'border-blue-600 bg-blue-50/50 text-blue-700 ring-2 ring-blue-600/20'
-                    : 'border-gray-200 hover:border-gray-300 text-gray-700'
+                    ? 'border-blue-500 bg-blue-600/15 text-white ring-1 ring-blue-500/30'
+                    : 'border-slate-800 bg-slate-950/40 hover:border-slate-700 text-slate-300'
                 }`}
               >
-                <div className="text-sm font-bold">{item.label}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{item.sub}</div>
+                <div className="text-sm font-bold text-white">{item.label}</div>
+                <div className="text-xs text-slate-400 mt-0.5">{item.sub}</div>
               </button>
             ))}
           </div>
@@ -134,61 +166,61 @@ const ProjectScopeBuilder = () => {
 
         {/* Add-ons */}
         <div className="space-y-3 pt-2">
-          <label className="block text-sm font-semibold text-gray-700">Recommended Enhancements</label>
+          <label className="block text-sm font-semibold text-slate-300">Recommended Modules</label>
           
-          <label className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+          <label className="flex items-center justify-between p-3.5 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-slate-700 transition-colors">
             <div className="flex items-center space-x-3">
               <input 
                 type="checkbox" 
                 checked={needsMomo}
                 onChange={(e) => setNeedsMomo(e.target.checked)}
-                className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                className="w-5 h-5 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500"
               />
               <div>
-                <p className="text-sm font-bold text-gray-900">MTN &amp; Airtel MoMo Gateway + WhatsApp Routing</p>
-                <p className="text-xs text-gray-500">Allow customers to pay via local mobile money or send orders to WhatsApp</p>
+                <p className="text-sm font-bold text-slate-200">MTN &amp; Airtel MoMo Gateway + WhatsApp Routing</p>
+                <p className="text-xs text-slate-400">Accept mobile money payments & send automated WhatsApp invoices</p>
               </div>
             </div>
           </label>
 
-          <label className="flex items-center justify-between p-3.5 rounded-xl border border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors">
+          <label className="flex items-center justify-between p-3.5 rounded-xl border border-slate-800 bg-slate-950/40 cursor-pointer hover:border-slate-700 transition-colors">
             <div className="flex items-center space-x-3">
               <input 
                 type="checkbox" 
                 checked={needsSeo}
                 onChange={(e) => setNeedsSeo(e.target.checked)}
-                className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                className="w-5 h-5 rounded border-slate-700 bg-slate-900 text-blue-600 focus:ring-blue-500"
               />
               <div>
-                <p className="text-sm font-bold text-gray-900">Kampala Local SEO &amp; Google Search Setup</p>
-                <p className="text-xs text-gray-500">Optimization to ensure your business ranks high on Google local searches</p>
+                <p className="text-sm font-bold text-slate-200">Kampala Local SEO &amp; Google Schema Setup</p>
+                <p className="text-xs text-slate-400">Target high search rankings across Ugandan business queries</p>
               </div>
             </div>
           </label>
         </div>
 
-        {/* Value Summary Card */}
-        <div className="mt-8 p-6 bg-gradient-to-br from-gray-900 to-blue-950 text-white rounded-2xl shadow-lg">
-          <p className="text-xs uppercase tracking-wider text-blue-400 font-bold mb-2">Included with your build:</p>
-          <div className="grid grid-cols-2 gap-2 text-xs text-gray-300 mb-6">
-            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> 100% Mobile Responsive</span>
-            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> High-Speed Cloud Hosting</span>
-            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> Free Security SSL Certificate</span>
-            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-green-400 mr-1.5"/> 30 Days Free Maintenance</span>
+        {/* Summary Card */}
+        <div className="mt-8 p-6 bg-gradient-to-br from-slate-950 to-blue-950/60 text-white rounded-2xl border border-blue-500/20 shadow-xl">
+          <p className="text-xs uppercase tracking-wider text-blue-400 font-bold mb-2">Included with every build:</p>
+          <div className="grid grid-cols-2 gap-2 text-xs text-slate-300 mb-6">
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-emerald-400 mr-1.5"/> 100% Mobile Responsive</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-emerald-400 mr-1.5"/> High-Speed Cloud Hosting</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-emerald-400 mr-1.5"/> Free SSL Security Certificate</span>
+            <span className="flex items-center"><Check className="w-3.5 h-3.5 text-emerald-400 mr-1.5"/> 30 Days Free Maintenance</span>
           </div>
 
           <a
             href={getWhatsAppLink()}
             target="_blank"
             rel="noreferrer"
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 px-6 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all shadow-md hover:shadow-blue-500/20 text-sm md:text-base"
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 px-6 rounded-xl font-bold flex items-center justify-center space-x-2 transition-all shadow-lg shadow-blue-600/30 text-sm md:text-base border border-blue-400/20"
           >
             <MessageSquare className="w-5 h-5" />
             <span>Get Tailored Proposal on WhatsApp</span>
             <ArrowRight className="w-5 h-5" />
           </a>
-          <p className="text-center text-[11px] text-gray-400 mt-2.5">
-            Instant response • No obligation • Custom scope review
+          <p className="text-center text-[11px] text-slate-400 mt-2.5">
+            Direct developer contact • No obligation • Instant response
           </p>
         </div>
       </div>
@@ -196,143 +228,31 @@ const ProjectScopeBuilder = () => {
   );
 };
 
-// --- ANIMATED TRUST & BRANDS BANNER ---
-const TrustMarqueeBanner = () => {
-  const marqueeVariants = {
-    animate: {
-      x: [0, -1036],
-      transition: {
-        x: {
-          repeat: Infinity,
-          repeatType: "loop",
-          duration: 25,
-          ease: "linear",
-        },
-      },
-    },
-  };
-
-  return (
-    <div className="bg-[#111111] border-y border-gray-800 overflow-hidden py-4 w-full relative z-20 shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-6 lg:gap-12">
-        <div className="flex items-center gap-6 md:gap-12 min-w-max border-b lg:border-b-0 lg:border-r border-gray-800 pb-4 lg:pb-0 lg:pr-12">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full border-2 border-white/20 flex items-center justify-center bg-white/5">
-              <CheckCircle className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <p className="text-white font-bold text-sm">Verified By</p>
-              <p className="text-gray-400 text-xs">Uganda Communications<br/>Commission</p>
-            </div>
-          </div>
-          
-          <div className="flex flex-col">
-            <p className="text-gray-400 text-xs font-medium mb-1">Running Strong</p>
-            <div className="text-3xl font-black text-white flex items-center">
-              7+ Years
-            </div>
-          </div>
-        </div>
-
-        <div className="flex-1 overflow-hidden relative w-full flex items-center">
-          <p className="text-gray-400 text-xs font-medium absolute left-0 z-10 bg-[#111111] pr-4 h-full flex items-center">
-            Brands That Trust Us
-          </p>
-          <div className="absolute left-28 top-0 bottom-0 w-16 bg-gradient-to-r from-[#111111] to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#111111] to-transparent z-10"></div>
-
-          <div className="overflow-hidden w-full ml-32">
-            <motion.div 
-              variants={marqueeVariants}
-              animate="animate"
-              className="flex items-center gap-16 whitespace-nowrap"
-            >
-              {[...Array(2)].map((_, index) => (
-                <React.Fragment key={index}>
-                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">DHL</span>
-                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer italic">ABF Freight</span>
-                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">JUMA HOMES</span>
-                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer tracking-widest">SUZUKI</span>
-                  <span className="text-xl font-black text-gray-500 hover:text-white transition-colors cursor-pointer">MTN</span>
-                </React.Fragment>
-              ))}
-            </motion.div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// --- ANIMATED AWARDS BANNER ---
-const AwardsBanner = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const badgeVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { type: "spring", stiffness: 100 }
-    }
-  };
-
-  const badges = [
-    { title: "Quality Choice", year: "2024", color: "bg-blue-600" },
-    { title: "Top Winner", year: "2022", color: "bg-indigo-600" },
-    { title: "High Performer", year: "Summer 2023", color: "bg-orange-500", shape: "square" },
-    { title: "Happiest Users", year: "2024", color: "bg-emerald-500" },
-    { title: "Top Rated", year: "Software", color: "bg-blue-800" },
+// --- TECHNICAL STANDARDS & TRUST METRICS ---
+const EngineeringStandards = () => {
+  const standards = [
+    { title: "99.9% Uptime", desc: "Global edge CDN & DNS infrastructure", icon: <ShieldCheck className="w-5 h-5 text-blue-400" /> },
+    { title: "Sub-2s Load Speeds", desc: "Optimized for mobile connections in East Africa", icon: <Zap className="w-5 h-5 text-amber-400" /> },
+    { title: "MTN & Airtel Ready", desc: "Certified local Mobile Money API routing", icon: <Smartphone className="w-5 h-5 text-emerald-400" /> },
+    { title: "Modern Codebases", desc: "Clean React, Next.js & Tailwind architecture", icon: <Code className="w-5 h-5 text-sky-400" /> }
   ];
 
   return (
-    <section className="py-16 bg-white border-b border-gray-100 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center justify-between gap-12">
-        <div className="max-w-md">
-          <p className="text-green-600 font-semibold mb-2">Testimonials</p>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Recognized for Excellence</h2>
-          <p className="text-gray-500 leading-relaxed">
-            At Sparta Inc Developers, we deliver top quality designs and exceptional service, consistently exceeding client expectations across Uganda.
-          </p>
-        </div>
-
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
-          className="flex flex-wrap justify-center lg:justify-end gap-6 md:gap-8 flex-1"
-        >
-          {badges.map((badge, i) => (
-            <motion.div key={i} variants={badgeVariants} className="flex flex-col items-center">
-              <div className={`
-                ${badge.color} text-white flex flex-col items-center justify-center p-4 shadow-lg
-                ${badge.shape === 'square' ? 'rounded-xl w-24 h-28' : 'rounded-full w-28 h-28 border-4 border-white outline outline-2 outline-gray-200'}
-              `}>
-                <CheckCircle className="w-5 h-5 mb-1 opacity-80" />
-                <span className="text-xs font-bold text-center leading-tight uppercase">{badge.title}</span>
-                <div className="w-8 h-[1px] bg-white/40 my-1"></div>
-                <span className="text-[10px] font-bold tracking-wider">{badge.year}</span>
+    <section className="py-14 bg-[#080d1a] border-y border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {standards.map((item, idx) => (
+            <div key={idx} className="p-5 rounded-2xl bg-slate-900/50 border border-slate-800/80 flex items-start space-x-3.5">
+              <div className="p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/50 flex-shrink-0">
+                {item.icon}
               </div>
-              
-              <div className="flex mt-3 text-yellow-400">
-                {[...Array(5)].map((_, starIndex) => (
-                  <svg key={starIndex} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+              <div className="text-left">
+                <h4 className="text-sm font-bold text-white mb-0.5">{item.title}</h4>
+                <p className="text-xs text-slate-400 leading-relaxed">{item.desc}</p>
               </div>
-              <span className="text-gray-500 font-bold text-sm mt-1">4.5 / 5</span>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -345,7 +265,7 @@ const InteractiveIndustryShowcase = () => {
   const niches = [
     {
       id: "schools",
-      icon: <GraduationCap className="w-6 h-6" />,
+      icon: <GraduationCap className="w-5 h-5" />,
       title: "Schools & Academies",
       tagline: "Automated Admissions & Parent Portals",
       description: "We eliminate administrative bottlenecks for educational institutions with self-service admission forms, printable prospectus views, and direct WhatsApp enrollment inquiries.",
@@ -356,12 +276,12 @@ const InteractiveIndustryShowcase = () => {
         "Direct Parent WhatsApp & Email Routing",
         "Staff Directory & Campus News Bulletin"
       ],
-      previewHeadline: "Landmark Academy Web Portal",
-      previewSub: "Live Demo Architecture"
+      previewHeadline: "Academic Web Portal",
+      previewSub: "Institutional Blueprint"
     },
     {
       id: "realestate",
-      icon: <Building2 className="w-6 h-6" />,
+      icon: <Building2 className="w-5 h-5" />,
       title: "Real Estate & Housing",
       tagline: "High-Converting Listing Engines",
       description: "Empower agents and property developers to showcase listings with interactive property filters, high-resolution galleries, location mapping, and automated site-visit bookings.",
@@ -372,12 +292,12 @@ const InteractiveIndustryShowcase = () => {
         "Interactive Google Map Location Pins",
         "Mortgage / Monthly Payment Estimator Widget"
       ],
-      previewHeadline: "Kampala Heights Listing Engine",
+      previewHeadline: "Property Listing Engine",
       previewSub: "Real Estate Portal Blueprint"
     },
     {
       id: "ecommerce",
-      icon: <ShoppingCart className="w-6 h-6" />,
+      icon: <ShoppingCart className="w-5 h-5" />,
       title: "E-Commerce & Retail",
       tagline: "Frictionless Local Checkout Systems",
       description: "Turn casual browsers into paying customers by accepting mobile payment methods natively alongside automated order alerts sent straight to your delivery team.",
@@ -388,12 +308,12 @@ const InteractiveIndustryShowcase = () => {
         "Automated Low-Stock Inventory Alerts",
         "Discount Coupon & Flash Sale Manager"
       ],
-      previewHeadline: "Retail Dashboard & Express Checkout",
-      previewSub: "E-Commerce System Blueprint"
+      previewHeadline: "Retail Dashboard & Checkout",
+      previewSub: "E-Commerce Blueprint"
     },
     {
       id: "logistics",
-      icon: <PackageCheck className="w-6 h-6" />,
+      icon: <PackageCheck className="w-5 h-5" />,
       title: "Logistics & Freight",
       tagline: "Real-Time Tracking & Quote Calculators",
       description: "Build client confidence for transport agencies, clearing firms, and fleet managers with instant shipping cost calculators and tracking updates.",
@@ -404,27 +324,29 @@ const InteractiveIndustryShowcase = () => {
         "Service Route & Warehouse Directory",
         "B2B Corporate Account Inquiry Forms"
       ],
-      previewHeadline: "Equator Freight & Transit Hub",
-      previewSub: "Logistics Application Blueprint"
+      previewHeadline: "Cargo & Transit Portal",
+      previewSub: "Logistics Blueprint"
     }
   ];
 
   const current = niches[activeTab];
 
   return (
-    <section id="solutions" className="py-24 bg-[#0a0f1d] text-white relative overflow-hidden">
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-10 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
+    <section id="solutions" className="py-24 bg-[#050914] text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-blue-400 font-semibold text-sm tracking-widest uppercase">Tailored Architectures</span>
-          <h2 className="text-3xl md:text-5xl font-black mt-2 mb-4 tracking-tight">How We Build For Your Industry</h2>
-          <p className="text-gray-400 text-base md:text-lg">
-            We don't use generic templates. Select your niche below to explore the custom features and interactive flows we engineer for your business.
+          <span className="text-blue-400 font-semibold text-xs tracking-widest uppercase bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full">
+            Tailored Architectures
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black mt-4 mb-4 tracking-tight">
+            How We Build For Your Industry
+          </h2>
+          <p className="text-slate-400 text-base md:text-lg">
+            We don't use generic templates. Select your niche below to explore the custom architectures and modules we engineer.
           </p>
         </div>
 
+        {/* Tab Buttons */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {niches.map((niche, idx) => {
             const isActive = activeTab === idx;
@@ -432,10 +354,10 @@ const InteractiveIndustryShowcase = () => {
               <button
                 key={niche.id}
                 onClick={() => setActiveTab(idx)}
-                className={`flex items-center gap-2 px-5 py-3.5 rounded-xl font-bold text-sm transition-all duration-300 relative ${
+                className={`flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-sm transition-all duration-300 relative ${
                   isActive 
                     ? "text-white shadow-lg shadow-blue-500/20" 
-                    : "text-gray-400 bg-gray-900/60 border border-gray-800 hover:text-white hover:bg-gray-800"
+                    : "text-slate-400 bg-slate-900/60 border border-slate-800 hover:text-white hover:bg-slate-800"
                 }`}
               >
                 {isActive && (
@@ -452,15 +374,16 @@ const InteractiveIndustryShowcase = () => {
           })}
         </div>
 
-        <div className="bg-gray-900/80 border border-gray-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl">
+        {/* Showcase Card */}
+        <div className="bg-slate-900/60 border border-slate-800 rounded-3xl p-6 md:p-10 backdrop-blur-xl shadow-2xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center text-left"
             >
               <div className="lg:col-span-7 space-y-6">
                 <div>
@@ -470,24 +393,24 @@ const InteractiveIndustryShowcase = () => {
                   <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                     {current.title}
                   </h3>
-                  <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                  <p className="text-slate-300 leading-relaxed text-sm md:text-base">
                     {current.description}
                   </p>
                 </div>
 
-                <div className="flex flex-wrap gap-2 py-2">
+                <div className="flex flex-wrap gap-2 py-1">
                   {current.metrics.map((m, mIdx) => (
-                    <span key={mIdx} className="bg-gray-800/90 text-gray-200 border border-gray-700 text-xs px-3 py-1.5 rounded-lg font-medium">
+                    <span key={mIdx} className="bg-slate-800/80 text-slate-200 border border-slate-700/60 text-xs px-3 py-1.5 rounded-lg font-medium">
                       ⚡ {m}
                     </span>
                   ))}
                 </div>
 
                 <div className="space-y-3 pt-2">
-                  <p className="text-xs font-bold uppercase tracking-wider text-gray-400">Included Feature Modules:</p>
+                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">Included Modules:</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {current.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start text-xs md:text-sm text-gray-200">
+                      <div key={fIdx} className="flex items-start text-xs md:text-sm text-slate-300">
                         <CheckCircle className="w-4 h-4 text-blue-400 mr-2.5 flex-shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </div>
@@ -495,29 +418,29 @@ const InteractiveIndustryShowcase = () => {
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-2">
                   <a 
-                    href="https://wa.me/256764110535" 
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello Sparta Inc! I would like to request a demo for ${current.title}.`)}`}
                     target="_blank" 
                     rel="noreferrer" 
                     className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg text-sm"
                   >
-                    Request {current.title} Demo
+                    Request {current.title} Blueprint
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
                 </div>
               </div>
 
               <div className="lg:col-span-5">
-                <div className="bg-gray-950 rounded-2xl border border-gray-800 p-6 shadow-inner relative overflow-hidden">
-                  <div className="flex items-center justify-between border-b border-gray-800 pb-4 mb-6">
+                <div className="bg-slate-950 rounded-2xl border border-slate-800 p-6 shadow-inner relative overflow-hidden">
+                  <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-6">
                     <div className="flex space-x-2">
                       <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
                       <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
                       <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
                     </div>
-                    <span className="text-[10px] font-mono text-gray-500 tracking-wider">
-                      MODULE PREVIEW
+                    <span className="text-[10px] font-mono text-slate-500 tracking-wider">
+                      ARCHITECTURE SPEC
                     </span>
                   </div>
 
@@ -528,32 +451,30 @@ const InteractiveIndustryShowcase = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
+                      <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 flex items-center justify-between text-xs text-slate-300">
                         <span>Automated Mobile Checkout</span>
+                        <span className="text-emerald-400 font-mono font-bold">READY</span>
+                      </div>
+                      <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 flex items-center justify-between text-xs text-slate-300">
+                        <span>WhatsApp Lead Router</span>
                         <span className="text-emerald-400 font-mono font-bold">ACTIVE</span>
                       </div>
-                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
-                        <span>WhatsApp Lead Router</span>
-                        <span className="text-emerald-400 font-mono font-bold">CONNECTED</span>
-                      </div>
-                      <div className="p-3 bg-gray-900 rounded-lg border border-gray-800 flex items-center justify-between text-xs text-gray-300">
+                      <div className="p-3 bg-slate-900 rounded-lg border border-slate-800 flex items-center justify-between text-xs text-slate-300">
                         <span>Kampala Local SEO Schema</span>
                         <span className="text-emerald-400 font-mono font-bold">OPTIMIZED</span>
                       </div>
                     </div>
 
-                    <div className="p-4 rounded-xl bg-gray-900/60 border border-gray-800 text-center">
-                      <p className="text-xs text-gray-400">Ready to launch in</p>
-                      <p className="text-xl font-extrabold text-blue-400 mt-0.5">5 to 10 Business Days</p>
+                    <div className="p-4 rounded-xl bg-slate-900/60 border border-slate-800 text-center">
+                      <p className="text-xs text-slate-400">Target Delivery</p>
+                      <p className="text-xl font-extrabold text-blue-400 mt-0.5">5 to 14 Business Days</p>
                     </div>
                   </div>
                 </div>
               </div>
-
             </motion.div>
           </AnimatePresence>
         </div>
-
       </div>
     </section>
   );
@@ -565,128 +486,262 @@ export default function App() {
 
   const whyChooseUsData = [
     {
-      icon: <Zap className="w-8 h-8 text-blue-600" />,
-      title: "Blazing Fast Speed",
+      icon: <Zap className="w-6 h-6 text-blue-400" />,
+      title: "Sub-2s Load Speeds",
       description: "We write clean, lightweight code engineered to load in under 2 seconds even on slow mobile networks."
     },
     {
-      icon: <Smartphone className="w-8 h-8 text-blue-600" />,
+      icon: <Smartphone className="w-6 h-6 text-emerald-400" />,
       title: "Mobile Money Native",
-      description: "Built-in automated checkout systems for MTN MoMo and Airtel Money to increase conversion rates."
+      description: "Direct API integration for MTN MoMo and Airtel Money to turn traffic into instant paying revenue."
     },
     {
-      icon: <TrendingUp className="w-8 h-8 text-blue-600" />,
+      icon: <TrendingUp className="w-6 h-6 text-sky-400" />,
       title: "Kampala Local SEO",
       description: "Custom local schema and performance tuning to position your brand at the top of local search queries."
     },
     {
-      icon: <ShieldCheck className="w-8 h-8 text-blue-600" />,
+      icon: <ShieldCheck className="w-6 h-6 text-indigo-400" />,
       title: "Bank-Grade Security",
-      description: "End-to-end encryption, automated cloud backups, and DDoS protection for zero business downtime."
+      description: "End-to-end SSL encryption, automated cloud backups, and DDoS protection for 24/7 business uptime."
     },
     {
-      icon: <HeartHandshake className="w-8 h-8 text-blue-600" />,
+      icon: <HeartHandshake className="w-6 h-6 text-amber-400" />,
       title: "Dedicated Local Support",
-      description: "Direct WhatsApp line to developers who understand the local market context and respond instantly."
+      description: "Direct WhatsApp communication with developers who understand the Ugandan market context."
     },
     {
-      icon: <Code className="w-8 h-8 text-blue-600" />,
+      icon: <Code className="w-6 h-6 text-blue-400" />,
       title: "No Bloated Templates",
-      description: "Custom architecture built precisely for your unique business workflows instead of generic plugins."
+      description: "Custom architecture built precisely for your unique business workflows instead of generic themes."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans selection:bg-blue-200 selection:text-blue-900">
+    <div className="min-h-screen bg-[#020617] text-slate-100 font-sans selection:bg-blue-600 selection:text-white">
       <SEOSchema />
+      <FloatingWhatsApp />
 
       {/* NAVIGATION */}
-      <nav className="fixed w-full top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
+      <nav className="fixed w-full top-0 z-50 bg-[#020617]/85 backdrop-blur-xl border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
+            {/* Brand Logo */}
             <div className="flex-shrink-0 flex items-center cursor-pointer">
-              <span className="text-2xl font-black tracking-tight text-gray-900">
-                SPARTA<span className="text-blue-600">INC.</span>
+              <span className="text-2xl font-black tracking-tight text-white">
+                SPARTA<span className="text-blue-500">INC.</span>
               </span>
             </div>
             
-            <div className="hidden md:flex items-center space-x-8">
-              <div className="flex items-center text-sm font-medium text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
-                <MapPin className="w-4 h-4 mr-1 text-blue-600" />
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center space-x-7">
+              <div className="flex items-center text-xs font-medium text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-full">
+                <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-400" />
                 Kampala, Uganda
               </div>
-              <a href="#services" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Services</a>
-              <a href="#why-us" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Why Us</a>
-              <a href="#solutions" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Solutions</a>
-              <a href="#proposal" className="text-gray-600 hover:text-blue-600 font-medium transition-colors">Proposal</a>
-              <a href="https://wa.me/256764110535" target="_blank" rel="noreferrer" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-colors flex items-center shadow-md hover:shadow-lg">
+              <a href="#services" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Services</a>
+              <a href="#why-us" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Why Us</a>
+              <a href="#solutions" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Solutions</a>
+              <a href="#proposal" className="text-slate-300 hover:text-blue-400 text-sm font-medium transition-colors">Scope Builder</a>
+              
+              {/* Header Social Logo Links */}
+              <div className="flex items-center space-x-2 pl-2 border-l border-slate-800">
+                <a 
+                  href="https://facebook.com/spartaincdev" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  aria-label="Sparta Inc Facebook"
+                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all"
+                >
+                  <Facebook className="w-4 h-4" />
+                </a>
+                <a 
+                  href="https://instagram.com/spartaincdev" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  aria-label="Sparta Inc Instagram"
+                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/40 transition-all"
+                >
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a 
+                  href={`mailto:${OFFICIAL_EMAIL}`} 
+                  aria-label="Email Sparta Inc Developers"
+                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition-all"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
+
+              <a 
+                href={`https://wa.me/${WHATSAPP_NUMBER}`} 
+                target="_blank" 
+                rel="noreferrer" 
+                className="bg-blue-600 hover:bg-blue-500 text-white px-5 py-2.5 rounded-xl font-semibold transition-all shadow-md shadow-blue-600/25 text-sm border border-blue-400/20"
+              >
                 Get Started
               </a>
             </div>
 
+            {/* Mobile Menu Trigger */}
             <div className="md:hidden flex items-center">
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-600 hover:text-gray-900 focus:outline-none">
-                {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-300 hover:text-white p-2">
+                {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Dropdown */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-xl absolute w-full">
-            <a href="#services" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Services</a>
-            <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Why Us</a>
-            <a href="#solutions" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Solutions</a>
-            <a href="#proposal" onClick={() => setIsMenuOpen(false)} className="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Request Proposal</a>
-            <a href="https://wa.me/256764110535" className="block w-full text-center mt-4 bg-blue-600 text-white px-5 py-3 rounded-lg font-medium">Get Started Today</a>
+          <div className="md:hidden bg-[#020617] border-t border-slate-800 px-5 pt-3 pb-6 space-y-3 shadow-2xl">
+            <a href="#services" onClick={() => setIsMenuOpen(false)} className="block py-2 text-sm font-medium text-slate-300 hover:text-blue-400">Services</a>
+            <a href="#why-us" onClick={() => setIsMenuOpen(false)} className="block py-2 text-sm font-medium text-slate-300 hover:text-blue-400">Why Us</a>
+            <a href="#solutions" onClick={() => setIsMenuOpen(false)} className="block py-2 text-sm font-medium text-slate-300 hover:text-blue-400">Solutions</a>
+            <a href="#proposal" onClick={() => setIsMenuOpen(false)} className="block py-2 text-sm font-medium text-slate-300 hover:text-blue-400">Scope Builder</a>
+            
+            <div className="flex items-center space-x-3 pt-3 border-t border-slate-800">
+              <a href="https://facebook.com/spartaincdev" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a href="https://instagram.com/spartaincdev" target="_blank" rel="noreferrer" className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a href={`mailto:${OFFICIAL_EMAIL}`} className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-300">
+                <Mail className="w-4 h-4" />
+              </a>
+            </div>
+
+            <a href={`https://wa.me/${WHATSAPP_NUMBER}`} className="block w-full text-center mt-3 bg-blue-600 text-white py-3 rounded-xl font-bold text-sm">
+              Get Started on WhatsApp
+            </a>
           </div>
         )}
       </nav>
 
-      {/* --- HERO SECTION WITH CYBER ANIMATION --- */}
+      {/* --- 1. HERO SECTION --- */}
       <Hero />
 
-      {/* --- TRUST MARQUEE BANNER --- */}
-      <TrustMarqueeBanner />
+      {/* --- 2. TECHNICAL STANDARDS (REPLACES FAKE AWARDS) --- */}
+      <EngineeringStandards />
 
-      {/* --- WHY US SECTION --- */}
-      <section id="why-us" className="py-20 bg-white">
+      {/* --- 3. WHY CHOOSE US SECTION --- */}
+      <section id="why-us" className="py-24 bg-[#020617] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">Why Top East African Enterprises Choose Sparta Inc</h2>
-            <p className="text-gray-500 text-base md:text-lg">Engineering standards tailored specifically for performance and business ROI.</p>
+            <span className="text-blue-400 font-semibold text-xs tracking-widest uppercase bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full">
+              Engineered for Uganda
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black mt-4 mb-4 tracking-tight">
+              Why Forward-Thinking Businesses Choose Sparta Inc
+            </h2>
+            <p className="text-slate-400 text-base md:text-lg">
+              We eliminate technical roadblocks and build high-performance software tailored for business growth.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whyChooseUsData.map((item, index) => (
-              <div key={index} className="p-8 rounded-2xl bg-gray-50 border border-gray-100 hover:border-blue-200 transition-all hover:shadow-lg">
-                <div className="mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
+              <div key={index} className="p-7 rounded-2xl bg-slate-900/40 border border-slate-800/80 hover:border-slate-700 transition-all hover:-translate-y-1 text-left">
+                <div className="p-3 w-fit rounded-xl bg-slate-800/60 border border-slate-700/50 mb-5">
+                  {item.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{item.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed">{item.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* --- INDUSTRY SHOWCASE --- */}
+      {/* --- 4. INDUSTRY SHOWCASE --- */}
       <InteractiveIndustryShowcase />
 
-      {/* --- AWARDS BANNER --- */}
-      <AwardsBanner />
-
-      {/* --- PROPOSAL BUILDER SECTION --- */}
-      <section id="proposal" className="py-20 bg-gray-50">
+      {/* --- 5. PROPOSAL BUILDER SECTION --- */}
+      <section id="proposal" className="py-24 bg-[#020617] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProjectScopeBuilder />
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
-      <footer className="bg-gray-950 text-gray-400 py-12 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-sm">© {new Date().getFullYear()} Sparta Inc Developers. All rights reserved. Kampala, Uganda.</p>
+      {/* --- 6. ENTERPRISE FOOTER WITH SOCIALS & OFFICIAL EMAIL --- */}
+      <footer className="bg-[#01040d] text-slate-400 py-16 border-t border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/60 text-left">
+            
+            {/* Column 1: Brand & Bio */}
+            <div className="md:col-span-5 space-y-4">
+              <span className="text-2xl font-black tracking-tight text-white">
+                SPARTA<span className="text-blue-500">INC.</span>
+              </span>
+              <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+                Engineering high-performance custom websites, mobile applications, and automated Mobile Money payment workflows across Uganda and East Africa.
+              </p>
+              <div className="flex items-center space-x-3 pt-2">
+                <a 
+                  href="https://facebook.com/spartaincdev" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  aria-label="Follow Sparta Inc on Facebook"
+                  className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-blue-400 hover:border-blue-500/40 transition-all"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a 
+                  href="https://instagram.com/spartaincdev" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  aria-label="Follow Sparta Inc on Instagram"
+                  className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/40 transition-all"
+                >
+                  <Instagram className="w-5 h-5" />
+                </a>
+                <a 
+                  href={`mailto:${OFFICIAL_EMAIL}`} 
+                  aria-label="Send email to Sparta Inc Developers"
+                  className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
+                >
+                  <Mail className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Column 2: Direct Contact Details */}
+            <div className="md:col-span-4 space-y-3">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-200">Official Inquiries</p>
+              <div className="space-y-2.5 text-sm">
+                <a href={`mailto:${OFFICIAL_EMAIL}`} className="flex items-center space-x-2.5 text-slate-300 hover:text-blue-400 transition-colors">
+                  <Mail className="w-4 h-4 text-blue-400" />
+                  <span>{OFFICIAL_EMAIL}</span>
+                </a>
+                <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="flex items-center space-x-2.5 text-slate-300 hover:text-emerald-400 transition-colors">
+                  <Smartphone className="w-4 h-4 text-emerald-400" />
+                  <span>+256 762 110 535 / +256 756 814 866</span>
+                </a>
+                <div className="flex items-center space-x-2.5 text-slate-400">
+                  <MapPin className="w-4 h-4 text-slate-500" />
+                  <span>Kampala, Uganda</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Column 3: Quick Links */}
+            <div className="md:col-span-3 space-y-3">
+              <p className="text-xs font-bold uppercase tracking-wider text-slate-200">Capabilities</p>
+              <ul className="space-y-2 text-sm text-slate-400">
+                <li><a href="#solutions" className="hover:text-white transition-colors">School & Institutional Portals</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">MTN/Airtel MoMo E-Commerce</a></li>
+                <li><a href="#solutions" className="hover:text-white transition-colors">Real Estate Listing Engines</a></li>
+                <li><a href="#proposal" className="hover:text-white transition-colors">Request Tailored Proposal</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+            <p>© {new Date().getFullYear()} Sparta Inc Developers. All rights reserved.</p>
+            <p>Built with React &amp; Tailwind CSS • Kampala, Uganda</p>
+          </div>
         </div>
       </footer>
 
