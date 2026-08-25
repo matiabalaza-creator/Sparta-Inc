@@ -13,7 +13,7 @@ import Hero from './components/Hero.jsx';
 const WHATSAPP_NUMBER = '256762110535';
 const OFFICIAL_EMAIL = 'info@spartaincdev.com';
 
-// Built-in SVG Icons (Zero package dependencies)
+// Built-in SVG Icons
 const FacebookIcon = () => (
   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -30,10 +30,10 @@ const InstagramIcon = () => (
 const FloatingWhatsApp = () => {
   return (
     <a
-      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Sparta Inc! 👋 I'd like to discuss a new web/app project.")}`}
+      href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Sparta Inc Dev! 👋 I'd like to discuss a new web/app project.")}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with Sparta Inc on WhatsApp"
+      aria-label="Chat with Sparta Inc Dev on WhatsApp"
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center p-3.5 bg-emerald-500 hover:bg-emerald-400 text-white rounded-full shadow-2xl shadow-emerald-500/40 border border-emerald-300/30 transition-all cursor-pointer group"
     >
       <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
@@ -42,18 +42,19 @@ const FloatingWhatsApp = () => {
       </span>
       <MessageCircle className="w-7 h-7 fill-current" />
       <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out font-semibold text-xs px-0 group-hover:px-2">
-        Chat with a Developer
+        Chat with Sparta Inc Dev
       </span>
     </a>
   );
 };
 
-// --- SEO SCHEMA COMPONENT ---
+// --- SEO SCHEMA COMPONENT (OPTIMIZED FOR GOOGLE MAPS & LOCAL SEARCH) ---
 const SEOSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Sparta Inc Developers",
+    "name": "Sparta Inc Dev",
+    "alternateName": ["Sparta Inc Developers", "spartaincdev"],
     "image": "https://spartaincdev.com/logo.png",
     "@id": "https://spartaincdev.com",
     "url": "https://spartaincdev.com",
@@ -64,7 +65,7 @@ const SEOSchema = () => {
       "addressLocality": "Kampala",
       "addressCountry": "UG"
     },
-    "description": "Sparta Inc Developers engineers high-performance websites and custom applications in Kampala, Uganda.",
+    "description": "Sparta Inc Dev engineers high-performance websites and custom mobile applications in Kampala, Uganda.",
     "sameAs": [
       `https://wa.me/${WHATSAPP_NUMBER}`,
       "https://facebook.com/spartaincdev",
@@ -98,7 +99,7 @@ const ProjectScopeBuilder = () => {
     const momoLabel = needsMomo ? 'Yes' : 'No';
     const seoLabel = needsSeo ? 'Yes' : 'No';
 
-    const message = `Hello Sparta Inc! 👋 I'm interested in starting a project:\n\n` +
+    const message = `Hello Sparta Inc Dev! 👋 I'm interested in starting a project:\n\n` +
       `• Project Type: ${typeLabel}\n` +
       `• Desired Timeline: ${timeLabel}\n` +
       `• Mobile Money Integration: ${momoLabel}\n` +
@@ -116,7 +117,7 @@ const ProjectScopeBuilder = () => {
         </div>
         <div>
           <h3 className="text-2xl font-bold text-white">Build Your Project Scope</h3>
-          <p className="text-sm text-slate-400">Select your requirements to receive a direct tailored proposal.</p>
+          <p className="text-sm text-slate-400">Select your requirements to receive a direct tailored proposal from Sparta Inc Dev.</p>
         </div>
       </div>
 
@@ -343,7 +344,7 @@ const InteractiveIndustryShowcase = () => {
             How We Build For Your Industry
           </h2>
           <p className="text-slate-400 text-base md:text-lg">
-            We don't use generic templates. Select your niche below to explore the custom architectures and modules we engineer.
+            We don't use generic templates. Select your niche below to explore the custom architectures and modules Sparta Inc Dev engineers.
           </p>
         </div>
 
@@ -419,7 +420,7 @@ const InteractiveIndustryShowcase = () => {
 
                 <div className="pt-2">
                   <a 
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello Sparta Inc! I would like to request a demo for ${current.title}.`)}`}
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello Sparta Inc Dev! I would like to request a demo for ${current.title}.`)}`}
                     target="_blank" 
                     rel="noreferrer" 
                     className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-6 py-3 rounded-xl transition-all shadow-lg text-sm"
@@ -525,12 +526,14 @@ export default function App() {
       <nav className="fixed w-full top-0 z-50 bg-[#020617]/85 backdrop-blur-xl border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
+            {/* Brand Logo - Explicitly Sparta Inc Dev */}
             <div className="flex-shrink-0 flex items-center cursor-pointer">
               <span className="text-2xl font-black tracking-tight text-white">
-                SPARTA<span className="text-blue-500">INC.</span>
+                SPARTA<span className="text-blue-500">INC DEV.</span>
               </span>
             </div>
             
+            {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-7">
               <div className="flex items-center text-xs font-medium text-slate-400 bg-slate-900/90 border border-slate-800 px-3 py-1.5 rounded-full">
                 <MapPin className="w-3.5 h-3.5 mr-1.5 text-blue-400" />
@@ -546,7 +549,7 @@ export default function App() {
                   href="https://facebook.com/spartaincdev" 
                   target="_blank" 
                   rel="noreferrer" 
-                  aria-label="Sparta Inc Facebook"
+                  aria-label="Sparta Inc Dev Facebook"
                   className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-blue-400 hover:border-blue-500/40 transition-all"
                 >
                   <FacebookIcon />
@@ -555,14 +558,14 @@ export default function App() {
                   href="https://instagram.com/spartaincdev" 
                   target="_blank" 
                   rel="noreferrer" 
-                  aria-label="Sparta Inc Instagram"
+                  aria-label="Sparta Inc Dev Instagram"
                   className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-pink-400 hover:border-pink-500/40 transition-all"
                 >
                   <InstagramIcon />
                 </a>
                 <a 
                   href={`mailto:${OFFICIAL_EMAIL}`} 
-                  aria-label="Email Sparta Inc Developers"
+                  aria-label="Email Sparta Inc Dev"
                   className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition-all"
                 >
                   <Mail className="w-4 h-4" />
@@ -579,6 +582,7 @@ export default function App() {
               </a>
             </div>
 
+            {/* Mobile Menu Trigger */}
             <div className="md:hidden flex items-center">
               <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-300 hover:text-white p-2">
                 {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -614,13 +618,13 @@ export default function App() {
         )}
       </nav>
 
-      {/* --- HERO SECTION --- */}
+      {/* --- 1. HERO SECTION --- */}
       <Hero />
 
-      {/* --- TECHNICAL STANDARDS --- */}
+      {/* --- 2. TECHNICAL STANDARDS --- */}
       <EngineeringStandards />
 
-      {/* --- WHY CHOOSE US SECTION --- */}
+      {/* --- 3. WHY CHOOSE US SECTION --- */}
       <section id="why-us" className="py-24 bg-[#020617] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -628,7 +632,7 @@ export default function App() {
               Engineered for Uganda
             </span>
             <h2 className="text-3xl md:text-5xl font-black mt-4 mb-4 tracking-tight">
-              Why Forward-Thinking Businesses Choose Sparta Inc
+              Why Forward-Thinking Businesses Choose Sparta Inc Dev
             </h2>
             <p className="text-slate-400 text-base md:text-lg">
               We eliminate technical roadblocks and build high-performance software tailored for business growth.
@@ -649,24 +653,24 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- INDUSTRY SHOWCASE --- */}
+      {/* --- 4. INDUSTRY SHOWCASE --- */}
       <InteractiveIndustryShowcase />
 
-      {/* --- PROPOSAL BUILDER SECTION --- */}
+      {/* --- 5. PROPOSAL BUILDER SECTION --- */}
       <section id="proposal" className="py-24 bg-[#020617] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProjectScopeBuilder />
         </div>
       </section>
 
-      {/* --- ENTERPRISE FOOTER --- */}
+      {/* --- 6. ENTERPRISE FOOTER --- */}
       <footer className="bg-[#01040d] text-slate-400 py-16 border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/60 text-left">
             
             <div className="md:col-span-5 space-y-4">
               <span className="text-2xl font-black tracking-tight text-white">
-                SPARTA<span className="text-blue-500">INC.</span>
+                SPARTA<span className="text-blue-500">INC DEV.</span>
               </span>
               <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
                 Engineering high-performance custom websites, mobile applications, and automated Mobile Money payment workflows across Uganda and East Africa.
@@ -676,7 +680,7 @@ export default function App() {
                   href="https://facebook.com/spartaincdev" 
                   target="_blank" 
                   rel="noreferrer" 
-                  aria-label="Follow Sparta Inc on Facebook"
+                  aria-label="Follow Sparta Inc Dev on Facebook"
                   className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-blue-400 hover:border-blue-500/40 transition-all"
                 >
                   <FacebookIcon />
@@ -685,14 +689,14 @@ export default function App() {
                   href="https://instagram.com/spartaincdev" 
                   target="_blank" 
                   rel="noreferrer" 
-                  aria-label="Follow Sparta Inc on Instagram"
+                  aria-label="Follow Sparta Inc Dev on Instagram"
                   className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-pink-400 hover:border-pink-500/40 transition-all"
                 >
                   <InstagramIcon />
                 </a>
                 <a 
                   href={`mailto:${OFFICIAL_EMAIL}`} 
-                  aria-label="Send email to Sparta Inc Developers"
+                  aria-label="Send email to Sparta Inc Dev"
                   className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all"
                 >
                   <Mail className="w-5 h-5" />
@@ -731,7 +735,7 @@ export default function App() {
           </div>
 
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-            <p>© {new Date().getFullYear()} Sparta Inc Developers. All rights reserved.</p>
+            <p>© 2026 Sparta Inc Dev. All rights reserved.</p>
             <p>Built with React &amp; Tailwind CSS • Kampala, Uganda</p>
           </div>
         </div>
