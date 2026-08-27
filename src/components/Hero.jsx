@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Smartphone, 
-  Globe, 
   Zap, 
   ArrowRight, 
   Code2, 
@@ -11,17 +10,18 @@ import {
   ShieldCheck, 
   Sparkles, 
   RefreshCw, 
-  Layers, 
-  Wifi, 
-  CreditCard, 
-  Check, 
-  Laptop
+  Database,
+  Terminal,
+  Layers
 } from 'lucide-react';
+
+const WHATSAPP_NUMBER = '256762110535';
 
 export default function Hero() {
   const canvasRef = useRef(null);
   const [syncState, setSyncState] = useState('compiled');
 
+  // Engine status loop
   useEffect(() => {
     const interval = setInterval(() => {
       setSyncState('compiling');
@@ -29,10 +29,11 @@ export default function Hero() {
         setSyncState('synced');
         setTimeout(() => setSyncState('compiled'), 1800);
       }, 1200);
-    }, 6000);
+    }, 6500);
     return () => clearInterval(interval);
   }, []);
 
+  // 60fps Ambient particle canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -85,7 +86,7 @@ export default function Hero() {
     }
 
     function initElements() {
-      particles = Array.from({ length: 40 }, () => new DriftParticle());
+      particles = Array.from({ length: 35 }, () => new DriftParticle());
     }
 
     initElements();
@@ -94,7 +95,7 @@ export default function Hero() {
       ctx.fillStyle = '#020617';
       ctx.fillRect(0, 0, width, height);
 
-      particles.forEach(p => {
+      particles.forEach((p) => {
         p.update();
         p.draw();
       });
@@ -125,32 +126,25 @@ export default function Hero() {
 
   return (
     <section className="relative pt-32 pb-24 md:pt-40 md:pb-28 bg-[#020617] text-white overflow-hidden min-h-[92vh] flex items-center">
-      
-      {/* Dynamic Background */}
+      {/* Background canvas */}
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 pointer-events-none w-full h-full"
       />
 
-      {/* Ambient Lighting Orbs */}
+      {/* Ambient lighting glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[450px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute top-1/3 right-10 w-[400px] h-[300px] bg-sky-500/10 rounded-full blur-[120px] pointer-events-none" />
 
-      {/* Blueprint Grid Overlay */}
+      {/* Blueprint grid overlay */}
       <div 
-        className="absolute inset-0 z-0 pointer-events-none opacity-[0.06]"
+        className="absolute inset-0 z-0 pointer-events-none opacity-[0.05]"
         style={{
           backgroundImage: `linear-gradient(to right, #3B82F6 1px, transparent 1px), linear-gradient(to bottom, #3B82F6 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
-          maskImage: 'radial-gradient(circle at 50% 40%, black 25%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(circle at 50% 40%, black 25%, transparent 80%)'
+          backgroundSize: '40px 40px'
         }}
       />
 
-      <div className="absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-[#020617] to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 right-0 h-28 bg-gradient-to-t from-[#020617] to-transparent z-10 pointer-events-none" />
-
-      {/* HERO CONTAINER */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
         <motion.div 
           variants={containerVariants}
@@ -158,16 +152,15 @@ export default function Hero() {
           animate="visible"
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center"
         >
-          {/* LEFT COLUMN: Main Pitch */}
+          {/* LEFT COLUMN: Value Proposition */}
           <div className="lg:col-span-6 space-y-6 text-left">
-            
             <motion.div variants={itemVariants} className="inline-flex items-center space-x-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-800 text-slate-300 text-xs font-medium backdrop-blur-xl shadow-inner">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
               </span>
               <Sparkles className="w-3.5 h-3.5 text-blue-400" />
-              <span>Sparta Inc Dev • Web & Mobile App Engineers</span>
+              <span>Sparta Inc Dev • Web &amp; Mobile App Engineers</span>
             </motion.div>
 
             <motion.h1 variants={itemVariants} className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.08] text-white">
@@ -175,7 +168,7 @@ export default function Hero() {
               <span className="bg-gradient-to-r from-white via-slate-100 to-blue-400 bg-clip-text text-transparent">
                 High-Performance
               </span> <br />
-              Websites & Apps
+              Websites &amp; Apps
             </motion.h1>
 
             <motion.p variants={itemVariants} className="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed font-normal">
@@ -184,7 +177,7 @@ export default function Hero() {
 
             <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 pt-1">
               <a
-                href="https://wa.me/256762110535"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Sparta Inc! 👋 I want to discuss a new web/app build.")}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center space-x-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold px-7 py-3.5 rounded-xl shadow-lg shadow-blue-600/25 hover:shadow-blue-500/40 transition-all text-sm sm:text-base border border-blue-400/30"
@@ -194,10 +187,10 @@ export default function Hero() {
               </a>
 
               <a
-                href="#solutions"
+                href="#services"
                 className="inline-flex items-center justify-center space-x-2 bg-slate-900/80 hover:bg-slate-900 text-slate-200 border border-slate-800 font-medium px-6 py-3.5 rounded-xl backdrop-blur-md transition-all text-sm sm:text-base hover:border-slate-700"
               >
-                <span>Explore Solutions</span>
+                <span>Explore Services</span>
                 <ArrowRight className="w-4 h-4 text-slate-400" />
               </a>
             </motion.div>
@@ -205,11 +198,11 @@ export default function Hero() {
             <motion.div variants={itemVariants} className="pt-6 border-t border-slate-800/80 grid grid-cols-3 gap-3 text-xs text-slate-400">
               <div className="flex items-center space-x-2">
                 <CheckCircle2 className="w-4 h-4 text-blue-400 flex-shrink-0" />
-                <span>MTN & Airtel MoMo Ready</span>
+                <span>MTN &amp; Airtel Native</span>
               </div>
               <div className="flex items-center space-x-2">
                 <ShieldCheck className="w-4 h-4 text-sky-400 flex-shrink-0" />
-                <span>Bank-Grade Security</span>
+                <span>Bank-Grade SSL</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Zap className="w-4 h-4 text-indigo-400 flex-shrink-0" />
@@ -218,160 +211,124 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* RIGHT COLUMN: DUAL-VIEWPORT ENGINE */}
-          <div className="lg:col-span-6 relative flex items-center justify-center">
-            <div className="absolute inset-0 bg-blue-500/5 rounded-3xl blur-2xl -z-10" />
-
-            <div className="absolute -top-6 left-1/2 -translate-x-1/2 z-30 inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900/90 border border-blue-500/30 text-[11px] font-mono text-blue-300 shadow-xl backdrop-blur-md">
+          {/* RIGHT COLUMN: REVERSE EXPLODED 3D ASSEMBLY SHOWCASE */}
+          <div className="lg:col-span-6 relative flex items-center justify-center min-h-[460px] [perspective:1200px]">
+            
+            {/* Status Syncer Pill */}
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-40 inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-blue-500/30 text-[11px] font-mono text-blue-300 shadow-2xl backdrop-blur-md">
               <RefreshCw className={`w-3 h-3 text-blue-400 ${syncState === 'compiling' ? 'animate-spin' : ''}`} />
               <span>
-                {syncState === 'compiling' && 'COMPILING SPARTA INC DEV ENGINE...'}
+                {syncState === 'compiling' && 'ASSEMBLING UI STACK...'}
                 {syncState === 'synced' && 'SYNCING ROUTE: /api/momo'}
                 {syncState === 'compiled' && 'STATUS: 100% RESPONSIVE ENGINE'}
               </span>
             </div>
 
-            {/* DUAL VIEWPORTS */}
-            <div className="relative w-full max-w-lg aspect-[4/3] sm:aspect-[16/11] flex items-center justify-between p-2 sm:p-4">
+            {/* 3D Assembly Container */}
+            <div className="relative w-full max-w-md h-[410px] mt-6">
               
-              {/* Web Browser Frame */}
-              <motion.div 
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className="w-[68%] sm:w-[72%] rounded-xl bg-slate-900/80 border border-slate-700/70 shadow-2xl backdrop-blur-2xl overflow-hidden z-10"
+              {/* Layer 1 (Backend Route Layer - Snaps from top-left) */}
+              <motion.div
+                initial={{ y: -50, x: -30, opacity: 0, rotateX: 25, rotateY: -15 }}
+                animate={{ y: 0, x: 0, opacity: 1, rotateX: 0, rotateY: 0 }}
+                transition={{ duration: 0.9, delay: 0.2, type: "spring", bounce: 0.2 }}
+                className="absolute top-0 left-2 right-10 p-3 rounded-xl bg-slate-950/95 border border-slate-800 shadow-2xl backdrop-blur-xl flex items-center justify-between z-10"
               >
-                <div className="px-3 py-2 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between">
-                  <div className="flex items-center space-x-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                <div className="flex items-center space-x-2.5">
+                  <div className="p-1.5 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-400">
+                    <Database className="w-4 h-4" />
                   </div>
-                  
-                  <div className="flex items-center space-x-1 px-2.5 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-[10px] text-slate-400 font-mono w-3/5 justify-center">
-                    <Globe className="w-2.5 h-2.5 text-blue-400" />
-                    <span className="truncate">spartaincdev.com</span>
+                  <div>
+                    <p className="text-[11px] font-mono text-slate-300">/api/v1/checkout</p>
+                    <p className="text-[10px] text-emerald-400 font-semibold">PostgreSQL · 24ms Response</p>
                   </div>
+                </div>
+                <span className="px-2 py-0.5 text-[9px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded">
+                  200 OK
+                </span>
+              </motion.div>
 
-                  <div className="flex items-center space-x-1 text-slate-500">
-                    <Laptop className="w-3 h-3" />
+              {/* Layer 2 (Core Dashboard Frame - Main Assembly Hub) */}
+              <motion.div
+                initial={{ scale: 0.82, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="absolute top-14 left-0 right-0 p-5 rounded-2xl bg-gradient-to-br from-slate-900/95 via-slate-900/90 to-blue-950/40 border border-slate-700/80 shadow-2xl shadow-blue-500/10 backdrop-blur-xl z-20"
+              >
+                {/* Window Header */}
+                <div className="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                  <div className="flex space-x-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+                  </div>
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-slate-400 bg-slate-950 px-2.5 py-0.5 rounded border border-slate-800">
+                    <Terminal className="w-3 h-3 text-blue-400" />
+                    spartaincdev.com/app
                   </div>
                 </div>
 
-                <div className="p-3 sm:p-4 space-y-3 font-sans text-left">
-                  <div className="flex items-center justify-between border-b border-slate-800/80 pb-2">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-6 h-6 rounded-lg bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-xs">S</div>
-                      <div className="h-2 w-16 bg-slate-700 rounded-full" />
+                {/* Dashboard Metrics */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between bg-slate-950/80 p-3 rounded-xl border border-slate-800/80">
+                    <div>
+                      <p className="text-[10px] text-slate-400 font-medium">Daily MoMo Volume</p>
+                      <p className="text-base font-extrabold text-white mt-0.5">UGX 8,450,000</p>
                     </div>
-                    <div className="flex space-x-1.5">
-                      <div className="h-2 w-8 bg-slate-800 rounded-full" />
-                      <div className="h-2 w-8 bg-slate-800 rounded-full" />
-                      <div className="h-2 w-10 bg-blue-500/40 rounded-full" />
-                    </div>
-                  </div>
-
-                  <div className="p-3 rounded-lg bg-gradient-to-r from-blue-900/30 to-slate-800/40 border border-blue-500/20 space-y-1.5">
-                    <div className="flex items-center space-x-1 text-[10px] text-blue-400 font-mono">
-                      <Code2 className="w-3 h-3" />
-                      <span>Sparta Inc Dev Blueprint</span>
-                    </div>
-                    <div className="h-2.5 w-3/4 bg-slate-200/90 rounded-full" />
-                    <div className="h-2 w-1/2 bg-slate-400/60 rounded-full" />
+                    <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                      +34.2%
+                    </span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="p-2 rounded-lg bg-slate-800/50 border border-slate-700/50 space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[9px] font-mono text-slate-400">Dashboard</span>
-                        <Zap className="w-2.5 h-2.5 text-amber-400" />
-                      </div>
-                      <div className="h-2 w-full bg-slate-700 rounded-full" />
-                      <div className="h-1.5 w-2/3 bg-slate-700/60 rounded-full" />
+                    <div className="p-2.5 rounded-lg bg-slate-950/50 border border-slate-800/60">
+                      <p className="text-[9px] text-slate-400">SEO Search Rank</p>
+                      <p className="text-xs font-bold text-blue-400 mt-0.5">Top #1 Kampala</p>
                     </div>
-
-                    <div className="p-2 rounded-lg bg-slate-800/50 border border-slate-700/50 space-y-1">
-                      <div className="flex items-center justify-between">
-                        <span className="text-[9px] font-mono text-slate-400">MoMo Checkout</span>
-                        <CreditCard className="w-2.5 h-2.5 text-sky-400" />
-                      </div>
-                      <div className="h-2 w-4/5 bg-blue-500/50 rounded-full" />
-                      <div className="h-1.5 w-1/2 bg-slate-700/60 rounded-full" />
+                    <div className="p-2.5 rounded-lg bg-slate-950/50 border border-slate-800/60">
+                      <p className="text-[9px] text-slate-400">Mobile Conversion</p>
+                      <p className="text-xs font-bold text-emerald-400 mt-0.5">99.2% Completed</p>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Connecting Pulse Beam */}
-              <div className="absolute left-[58%] top-1/2 -translate-y-1/2 w-16 h-1 z-20 pointer-events-none hidden sm:block">
-                <div className="w-full h-full bg-gradient-to-r from-blue-500 to-sky-400 opacity-60 rounded-full blur-[1px]" />
-                <motion.div 
-                  animate={{ x: [0, 48, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                  className="w-3 h-3 rounded-full bg-white shadow-lg shadow-sky-400/80 -mt-2 -ml-1"
-                />
-              </div>
-
-              {/* Mobile App Frame */}
-              <motion.div 
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="w-[42%] sm:w-[40%] rounded-2xl bg-slate-950 border-2 border-slate-700/80 shadow-2xl backdrop-blur-2xl overflow-hidden z-20 absolute right-1 sm:right-2 top-4 sm:top-2"
+              {/* Layer 3 (Floating Payment Layer - Snaps from bottom-right) */}
+              <motion.div
+                initial={{ y: 50, x: 30, opacity: 0, rotateX: -20, rotateY: 15 }}
+                animate={{ y: 0, x: 0, opacity: 1, rotateX: 0, rotateY: 0 }}
+                transition={{ duration: 0.9, delay: 0.6, type: "spring", bounce: 0.2 }}
+                className="absolute bottom-3 right-0 left-12 p-3.5 rounded-xl bg-slate-900/95 border border-blue-500/40 shadow-2xl backdrop-blur-xl z-30 flex items-center justify-between"
               >
-                <div className="pt-2 pb-1 bg-slate-950 flex justify-center items-center">
-                  <div className="w-12 h-1.5 bg-slate-800 rounded-full" />
-                </div>
-
-                <div className="px-3 py-1.5 bg-slate-900/90 border-b border-slate-800/80 flex items-center justify-between text-[10px]">
-                  <span className="font-mono text-slate-300 font-bold">SpartaIncDev</span>
-                  <div className="flex items-center space-x-1 text-slate-400">
-                    <Wifi className="w-2.5 h-2.5 text-blue-400" />
-                    <span className="text-[8px]">5G</span>
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+                    <Smartphone className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-white">MTN &amp; Airtel MoMo API</p>
+                    <p className="text-[10px] text-slate-400">Instant SMS &amp; WhatsApp Receipt</p>
                   </div>
                 </div>
-
-                <div className="p-2.5 space-y-2 text-left">
-                  <div className="p-2 rounded-xl bg-blue-950/60 border border-blue-500/30 space-y-1.5 shadow-inner">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[9px] font-bold text-blue-300 flex items-center gap-1">
-                        <Smartphone className="w-2.5 h-2.5 text-sky-400" />
-                        MTN / Airtel API
-                      </span>
-                      <span className="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[8px] font-mono flex items-center gap-0.5">
-                        <Check className="w-2 h-2" /> Live
-                      </span>
-                    </div>
-
-                    <div className="bg-slate-900/90 p-1.5 rounded-lg border border-slate-800 text-[9px] space-y-0.5 font-mono">
-                      <div className="text-slate-400">Amount: <span className="text-white font-bold">UGX 150,000</span></div>
-                      <div className="text-slate-500 text-[8px]">Status: Payment Confirmed</div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <div className="p-1.5 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center justify-between">
-                      <div className="flex items-center space-x-1.5">
-                        <div className="w-4 h-4 rounded bg-slate-800 flex items-center justify-center text-slate-400 text-[8px]"><Layers className="w-2.5 h-2.5" /></div>
-                        <div className="h-1.5 w-12 bg-slate-700 rounded-full" />
-                      </div>
-                      <div className="w-2 h-2 rounded-full bg-blue-500" />
-                    </div>
-                  </div>
-
-                  <div className="pt-0.5">
-                    <div className="w-full py-1 rounded-lg bg-blue-600 text-center text-[9px] font-bold text-white shadow-md">
-                      Confirm Action
-                    </div>
-                  </div>
-                </div>
-
-                <div className="py-1 px-4 bg-slate-950 border-t border-slate-900 flex justify-around items-center">
-                  <div className="w-2 h-2 rounded-full bg-blue-400" />
-                  <div className="w-2 h-2 rounded-full bg-slate-700" />
-                  <div className="w-2 h-2 rounded-full bg-slate-700" />
+                <div className="flex items-center text-emerald-400 text-xs font-semibold gap-1">
+                  <CheckCircle2 className="w-4 h-4" />
+                  <span>Synced</span>
                 </div>
               </motion.div>
+
+              {/* Layer 4 (Floating Code Badge - Snaps from left) */}
+              <motion.div
+                initial={{ x: -40, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                className="absolute -bottom-2 -left-2 px-3 py-1.5 rounded-lg bg-blue-600 text-white font-mono text-[10px] font-semibold shadow-xl border border-blue-400/30 flex items-center gap-1.5 z-40"
+              >
+                <Code2 className="w-3.5 h-3.5" />
+                <span>&lt;Assembly Complete /&gt;</span>
+              </motion.div>
+
             </div>
           </div>
+
         </motion.div>
       </div>
     </section>
