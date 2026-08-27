@@ -13,7 +13,7 @@ import Hero from './components/Hero.jsx';
 const WHATSAPP_NUMBER = '256762110535';
 const OFFICIAL_EMAIL = 'info@spartaincdev.com';
 
-// Built-in SVG Icons
+// Built-in SVG Icons (Zero package dependencies)
 const FacebookIcon = () => (
   <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
     <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -48,7 +48,7 @@ const FloatingWhatsApp = () => {
   );
 };
 
-// --- SEO SCHEMA COMPONENT (OPTIMIZED FOR GOOGLE MAPS & LOCAL SEARCH) ---
+// --- SEO SCHEMA COMPONENT ---
 const SEOSchema = () => {
   const schemaData = {
     "@context": "https://schema.org",
@@ -78,6 +78,92 @@ const SEOSchema = () => {
       type="application/ld+json" 
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} 
     />
+  );
+};
+
+// --- DEDICATED SERVICES SECTION ---
+const ServicesSection = () => {
+  const services = [
+    {
+      icon: <Globe className="w-6 h-6 text-blue-400" />,
+      title: "High-Performance Web Design",
+      desc: "Fast, custom-coded websites designed specifically to load under 2 seconds on mobile data networks across Uganda.",
+      features: ["Custom React & Next.js Builds", "100% Responsive Mobile UI/UX", "SEO Schema Structure"]
+    },
+    {
+      icon: <Smartphone className="w-6 h-6 text-emerald-400" />,
+      title: "Mobile Money E-Commerce",
+      desc: "Turn traffic into sales with native MTN MoMo and Airtel Money checkouts plus automated WhatsApp ordering workflows.",
+      features: ["Direct MoMo API Integration", "Automated WhatsApp Alerts", "Digital Product Delivery"]
+    },
+    {
+      icon: <Zap className="w-6 h-6 text-amber-400" />,
+      title: "Custom Portals & Dashboards",
+      desc: "Streamline operations with school management engines, real estate portals, and role-based admin workflows.",
+      features: ["Student & Admission Portals", "Property Listing Filters", "Role-Based Access (RBAC)"]
+    },
+    {
+      icon: <TrendingUp className="w-6 h-6 text-sky-400" />,
+      title: "Kampala Local SEO Growth",
+      desc: "Target top search rankings on Google for high-intent business terms like web design and software builders in Uganda.",
+      features: ["Local Schema Markup", "Google Business Profile Sync", "Search Console Indexing"]
+    }
+  ];
+
+  return (
+    <section id="services" className="py-24 bg-[#050914] text-white relative border-t border-slate-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-blue-400 font-semibold text-xs tracking-widest uppercase bg-blue-500/10 border border-blue-500/20 px-3 py-1 rounded-full">
+            Engineering Capabilities
+          </span>
+          <h2 className="text-3xl md:text-5xl font-black mt-4 mb-4 tracking-tight">
+            Comprehensive Digital Services
+          </h2>
+          <p className="text-slate-400 text-base md:text-lg">
+            Every solution is engineered from the ground up for maximum speed, security, and local business conversion.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((srv, idx) => (
+            <div 
+              key={idx} 
+              className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-blue-500/40 transition-all hover:-translate-y-1 flex flex-col justify-between text-left group"
+            >
+              <div>
+                <div className="p-3 w-fit rounded-xl bg-slate-800/80 border border-slate-700/60 mb-5 group-hover:bg-blue-600/20 group-hover:border-blue-500/30 transition-colors">
+                  {srv.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{srv.title}</h3>
+                <p className="text-slate-400 text-xs leading-relaxed mb-6">{srv.desc}</p>
+                
+                <div className="space-y-2 border-t border-slate-800/80 pt-4 mb-6">
+                  {srv.features.map((feat, fIdx) => (
+                    <div key={fIdx} className="flex items-center text-xs text-slate-300">
+                      <Check className="w-3.5 h-3.5 text-blue-400 mr-2 flex-shrink-0" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <a 
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hello Sparta Inc Dev! I would like to discuss: ${srv.title}`)}`}
+                target="_blank" 
+                rel="noreferrer"
+                className="w-full text-center py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-blue-600 text-white text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>Discuss Scope</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
   );
 };
 
@@ -526,7 +612,7 @@ export default function App() {
       <nav className="fixed w-full top-0 z-50 bg-[#020617]/85 backdrop-blur-xl border-b border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Brand Logo - Explicitly Sparta Inc Dev */}
+            {/* Brand Logo */}
             <div className="flex-shrink-0 flex items-center cursor-pointer">
               <span className="text-2xl font-black tracking-tight text-white">
                 SPARTA<span className="text-blue-500">INC DEV.</span>
@@ -624,7 +710,10 @@ export default function App() {
       {/* --- 2. TECHNICAL STANDARDS --- */}
       <EngineeringStandards />
 
-      {/* --- 3. WHY CHOOSE US SECTION --- */}
+      {/* --- 3. DEDICATED SERVICES SECTION --- */}
+      <ServicesSection />
+
+      {/* --- 4. WHY CHOOSE US SECTION --- */}
       <section id="why-us" className="py-24 bg-[#020617] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -653,17 +742,17 @@ export default function App() {
         </div>
       </section>
 
-      {/* --- 4. INDUSTRY SHOWCASE --- */}
+      {/* --- 5. INDUSTRY SHOWCASE --- */}
       <InteractiveIndustryShowcase />
 
-      {/* --- 5. PROPOSAL BUILDER SECTION --- */}
+      {/* --- 6. PROPOSAL BUILDER SECTION --- */}
       <section id="proposal" className="py-24 bg-[#020617] relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProjectScopeBuilder />
         </div>
       </section>
 
-      {/* --- 6. ENTERPRISE FOOTER --- */}
+      {/* --- 7. ENTERPRISE FOOTER --- */}
       <footer className="bg-[#01040d] text-slate-400 py-16 border-t border-slate-800/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-slate-800/60 text-left">
@@ -725,9 +814,9 @@ export default function App() {
             <div className="md:col-span-3 space-y-3">
               <p className="text-xs font-bold uppercase tracking-wider text-slate-200">Capabilities</p>
               <ul className="space-y-2 text-sm text-slate-400">
+                <li><a href="#services" className="hover:text-white transition-colors">High-Performance Web Design</a></li>
+                <li><a href="#services" className="hover:text-white transition-colors">MTN/Airtel MoMo E-Commerce</a></li>
                 <li><a href="#solutions" className="hover:text-white transition-colors">School & Institutional Portals</a></li>
-                <li><a href="#solutions" className="hover:text-white transition-colors">MTN/Airtel MoMo E-Commerce</a></li>
-                <li><a href="#solutions" className="hover:text-white transition-colors">Real Estate Listing Engines</a></li>
                 <li><a href="#proposal" className="hover:text-white transition-colors">Request Tailored Proposal</a></li>
               </ul>
             </div>
