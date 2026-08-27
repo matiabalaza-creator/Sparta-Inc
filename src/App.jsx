@@ -825,7 +825,7 @@ export default function App() {
 
           <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
             <p>© 2026 Sparta Inc Dev. All rights reserved.</p>
-            <p>Built with React &amp; Tailwind CSS • Kampala, Uganda</p>
+            <p>Kampala, Uganda</p>
           </div>
         </div>
       </footer>
